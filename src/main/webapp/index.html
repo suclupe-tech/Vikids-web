@@ -31,6 +31,43 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                 padding: 20px;
                 font-size: 14px;
             }
+            .oferta-label {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background-color: orange;
+                color: white;
+                padding: 5px 15px;
+                border-radius: 15px;
+                font-weight: bold;
+                font-size: 14px;
+                z-index: 10;
+            }
+
+            .promo-img {
+                height: 300px;
+                object-fit: cover;
+                width: 100%;
+                border-radius: 10px;
+                transition: transform 0.3s ease;
+            }
+
+            .promo-img:hover {
+                transform: scale(1.05);
+            }
+
+            .descripcion-box {
+                background-color: #f8f9fa;
+                border-radius: 10px;
+                padding: 15px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+                transition: box-shadow 0.3s ease;
+                margin-top: 10px;
+            }
+
+            .descripcion-box:hover {
+                box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+            }
         </style>
     </head>
     <body>
@@ -59,7 +96,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="catalogoDropdown" role="button" data-bs-toggle="dropdown">Catálogo</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Pantalo</a></li>
+                                <li><a class="dropdown-item" href="#">Pantalón</a></li>
                                 <li><a class="dropdown-item" href="#">Polos</a></li>
                                 <li><a class="dropdown-item" href="#">Blusas</a></li>
                                 <li><a class="dropdown-item" href="#">MiniFaldas</a></li>
@@ -95,10 +132,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <div id="carouselFotos" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="banner1.jpg" class="d-block w-100" alt="...">
+                    <img src="imagen/carrucel 1.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
-                    <img src="banner2.jpg" class="d-block w-100" alt="...">
+                    <img src="imagen/carrucel 2.jpg" class="d-block w-100" alt="...">
                 </div>
                 <div class="carousel-item">
                     <img src="banner3.jpg" class="d-block w-100" alt="...">
@@ -110,6 +147,48 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
             <button class="carousel-control-next" type="button" data-bs-target="#carouselFotos" data-bs-slide="next">
                 <span class="carousel-control-next-icon"></span>
             </button>
+        </div>
+
+        <!-- Sección de Promociones -->
+        <div class="container mt-5">
+            <h2 class="text-center mb-4">Promociones</h2>
+            <div class="row text-center">
+                <!-- Pantalón -->
+                <div class="col-md-4 mb-4">
+                    <div class="position-relative">
+                        <span class="oferta-label">OFERTA</span>
+                        <img src="imagen/image1.png" class="promo-img" alt="Pantalón">
+                    </div>
+                    <div class="descripcion-box">
+                        <h5>Pantalón Jean para Niña</h5>
+                        <p>Comodidad y estilo para todas las edades. Disponible en varias tallas.</p>
+                    </div>
+                </div>
+
+                <!-- Polo -->
+                <div class="col-md-4 mb-4">
+                    <div class="position-relative">
+                        <span class="oferta-label">OFERTA</span>
+                        <img src="imagen/image2.png" class="promo-img" alt="Polo">
+                    </div>
+                    <div class="descripcion-box">
+                        <h5>Polo de Algodón para Niña</h5>
+                        <p>Suave al tacto y con diseños coloridos. Ideal para el verano.</p>
+                    </div>
+                </div>
+
+                <!-- Short -->
+                <div class="col-md-4 mb-4">
+                    <div class="position-relative">
+                        <span class="oferta-label">OFERTA</span>
+                        <img src="imagen/image3.png" class="promo-img" alt="Short">
+                    </div>
+                    <div class="descripcion-box">
+                        <h5>Short Casual para Niña</h5>
+                        <p>Frescos y cómodos. Perfectos para días calurosos y juegos al aire libre.</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Footer -->
