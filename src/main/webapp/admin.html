@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <title>Login Admin</title>
+    </head>
+    <body>
+        <div style="background-color: #E6DAF0; padding: 15px 30px; display: flex; justify-content: center; align-items: center;">
+            <img src="imagen/logo 3d vikid.png" alt="Logo de la Empresa" style="height: 60px; margin-right: 30px;">
+
+        </div>
+        <div></div>
+        <div class="container mt-5 d-flex justify-content-center" >
+            <form >
+                <div class="card" style="width: 30rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 10px;">
+                    <div class="card-body">
+                        <h2 class="text-center">Iniciar Sesion</h2>
+                        <input type="text" name="txtusuario" class="form-control mt-5" placeholder="Ingrese Usuario" required="">
+                        <input type="password" name="txtclave" class="form-control mt-4" placeholder="Ingrese Clave" required="">
+                        <div class="form-check mt-3 text-start" style="margin-left: 0.25rem;">
+                            <input class="form-check-input" type="checkbox" id="recordar" name="recordar">
+                            <label class="form-check-label" for="recordar">
+                                Recordarme
+                            </label>
+                        </div>
+                        <input type="submit" class="btn btn-primary btn-block mt-4" value="Ingresar"> 
+                        <div class="text-start mt-4">
+                            <a href="dashboard.jsp" style="text-decoration: none; color:  #0d6efd;">¿No tienes cuenta? Crear una</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>
