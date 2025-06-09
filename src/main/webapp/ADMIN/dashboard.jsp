@@ -97,7 +97,7 @@
         <!-- Topbar -->
         <div class="topbar fixed-top d-flex align-items-center">
             <span id="menuToggle">☰</span>
-            <img src="imagen/logo 3d vikid.png" alt="Logo">
+            <img src="../imagen/logo 3d vikid.png" alt="Logo">
             <h3 class="mb-0">Sistema de Ventas</h3>
             <!-- Menú de usuario a la derecha -->
             <div class="ms-auto dropdown">

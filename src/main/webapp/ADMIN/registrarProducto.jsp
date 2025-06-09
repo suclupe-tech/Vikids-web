@@ -39,7 +39,7 @@
         <div class="container py-5">
             <div class="form-card mx-auto" style="max-width: 850px;">
                 <div class="d-flex justify-content-end">
-                    <a href="admin.jsp" class="btn btn-sm btn-outline-danger rounded-circle" title="Cerrar y volver">
+                    <a href="../ADMIN/dashboard.jsp" class="btn btn-sm btn-outline-danger rounded-circle" title="Cerrar y volver">
                         <i class="bi bi-x-lg"></i>
                     </a>
                 </div>
