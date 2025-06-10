@@ -1,0 +1,93 @@
+--creacion de base de datos
+CREATE DATABASE vikids
+ 
+-- Tabla: MODELO
+CREATE TABLE modelo (
+	modelo_id INT NOT NULL AUTO_INCREMENT,
+	modelo_name VARCHAR(50) NOT NULL,
+	PRIMARY KEY (modelo_id)
+);
+ 
+-- Tabla: TALLA
+CREATE TABLE talla (
+	talla_id INT NOT NULL AUTO_INCREMENT,
+	talla_name VARCHAR(50) NOT NULL,
+	PRIMARY KEY (talla_id)
+);
+ 
+-- Tabla: COLOR
+CREATE TABLE color (
+	color_id INT NOT NULL AUTO_INCREMENT,
+	color_name VARCHAR(50) NOT NULL,
+	PRIMARY KEY (color_id)
+);
+ 
+-- Tabla: PRODUCTO
+CREATE TABLE producto (
+	product_id INT NOT NULL AUTO_INCREMENT,
+	product_name VARCHAR(50) NOT NULL,
+	product_precio INT NOT NULL,
+	id_modelo INT NOT NULL,
+	id_talla INT NOT NULL,
+	id_color INT NOT NULL,
+	PRIMARY KEY (product_id),
+	FOREIGN KEY (id_modelo) REFERENCES modelo(modelo_id),
+	FOREIGN KEY (id_talla) REFERENCES talla(talla_id),
+	FOREIGN KEY (id_color) REFERENCES color(color_id)
+);
+ 
+-- Tabla: CLIENTE
+CREATE TABLE cliente (
+	client_id INT NOT NULL AUTO_INCREMENT,
+	client_name VARCHAR(50) NOT NULL,
+	client_lastname VARCHAR(50) NOT NULL,
+	client_dni CHAR(8) NOT NULL,
+	client_sex CHAR(1) NOT NULL,
+	PRIMARY KEY (client_id)
+);
+ 
+-- Tabla: ENTREGA
+CREATE TABLE entrega (
+	entrega_id INT NOT NULL AUTO_INCREMENT,
+    entrega_departamento VARCHAR(50),
+	entrega_provincia VARCHAR(50),
+	entrega_distrito VARCHAR(50) NOT NULL,
+	entrega_direccion VARCHAR(100) NOT NULL,
+	PRIMARY KEY (entrega_id)
+);
+ 
+-- Tabla: PEDIDO
+CREATE TABLE pedido (
+	pedido_id INT NOT NULL AUTO_INCREMENT,
+	pedido_monto_total INT NOT NULL,
+	pedido_fecha DATETIME NOT NULL,
+	id_producto INT NOT NULL,
+	id_cliente INT NOT NULL,
+	entrega_id INT NOT NULL,
+	PRIMARY KEY (pedido_id),
+	FOREIGN KEY (id_producto) REFERENCES producto(product_id),
+	FOREIGN KEY (id_cliente) REFERENCES cliente(client_id),
+	FOREIGN KEY (entrega_id) REFERENCES entrega(entrega_id)
+);
+ 
+-- Tabla: DETALLE_PEDIDO
+CREATE TABLE detalle_pedido (
+	detalle_id INT NOT NULL AUTO_INCREMENT,
+	pedido_id INT NOT NULL,
+	producto_id INT NOT NULL,
+	cantidad MONEY NOT NULL,
+	precio_unitario MONEY NOT NULL,
+	precio_total MONEY NOT NULL,
+	PRIMARY KEY (detalle_id),
+	FOREIGN KEY (pedido_id) REFERENCES pedido(pedido_id),
+	FOREIGN KEY (producto_id) REFERENCES producto(product_id)
+);
+ 
+-- Tabla: ADMINISTRADOR
+CREATE TABLE administrador (
+	admin_id INT NOT NULL AUTO_INCREMENT,
+	admin_name VARCHAR(50) NOT NULL,
+	admin_usuario VARCHAR(50) NOT NULL,
+	admin_password VARCHAR(50) NOT NULL,
+	admin_phone VARCHAR(50) NOT NULL,
+	PRIMARY KEY (admin_id)
