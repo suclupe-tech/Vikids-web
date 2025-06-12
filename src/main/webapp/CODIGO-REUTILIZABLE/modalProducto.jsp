@@ -7,7 +7,7 @@
         <div class="flex flex-col md:flex-row gap-6">
             <!-- Imagen -->
             <div class="md:w-1/2">
-                <img id="modalImagen" src="" alt="" class="rounded-lg shadow-xl object-cover h-64 w-full" />
+                <img id="modalImagen" src="" alt="" class="rounded-lg shadow-xl object-cover h-70 w-full" />
             </div>
 
             <!-- Detalles -->

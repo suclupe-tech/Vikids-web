@@ -10,6 +10,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
         <style>
             body {
@@ -43,7 +47,8 @@
         </style>
     </head>
     <body class="p-4">
-        <div class="container table-wrapper">
+        <%@include file="../CODIGO-REUTILIZABLE/adminPrincipal.jsp" %>
+        <div class="container table-wrapper ml-64 mt-20 p-6">
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <h4 class="mb-0">Ventas Registradas</h4>
                 <div class="d-flex gap-2 no-print">
@@ -161,5 +166,6 @@
             }
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+        <script src="../JS/dasboard.js"></script>
     </body>
 </html>

@@ -30,7 +30,7 @@
                     <li><a href="#" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">Casacas</a></li>
                 </ul>
             </div>
-            <a href="#" class="hover:text-pink-600">Contacto</a>
+            <a href="contacto.jsp" class="hover:text-pink-600">Contacto</a>
         </div>
 
         <!-- Botón hamburguesa -->
