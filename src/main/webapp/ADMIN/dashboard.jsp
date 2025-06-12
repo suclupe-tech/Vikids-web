@@ -6,6 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@page import="DAO.ProductoDAO, MODELO.Producto, java.util.List" %>
+<%
+    ProductoDAO dao = new ProductoDAO();
+    List<Producto> lista = dao.listar();
+    %>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -55,20 +60,25 @@
                             <th class="px-4 py-3">Categoría</th>
                             <th class="px-4 py-3">Marca</th>
                             <th class="px-4 py-3">Unidad</th>
+                            <th class="px-4 py-3">Imagen</th>
                             <th class="px-4 py-3">Acción</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <% for (Producto p : lista) {%>
                         <tr class="hover:bg-gray-100">
                             <td class="px-4 py-3"><input type="checkbox" class="product-check" value="1"></td>
-                            <td class="px-4 py-3">1</td>
-                            <td class="px-4 py-3">PROD001</td>
-                            <td class="px-4 py-3">Jean Niña Azul</td>
-                            <td class="px-4 py-3">50</td>
-                            <td class="px-4 py-3">S/ 39.90</td>
-                            <td class="px-4 py-3">Ropa</td>
-                            <td class="px-4 py-3">FantasyKids</td>
-                            <td class="px-4 py-3">Unidad</td>
+                            <td class="px-4 py-3"><%=p.getId()%></td>
+                            <td class="px-4 py-3"><%=p.getCodigo()%></td>
+                            <td class="px-4 py-3"><%=p.getNombre()%></td>
+                            <td class="px-4 py-3"><%=p.getStock()%></td>
+                            <td class="px-4 py-3"><%=p.getPrecio()%></td>
+                            <td class="px-4 py-3"><%=p.getCategoria()%></td>
+                            <td class="px-4 py-3"><%=p.getMarca()%></td>
+                            <td class="px-4 py-3"><%=p.getUnidad()%></td>
+                            <td class="px-4 py-3">
+                                <img src="../imagen/<%=p.getImagen()%>" class="w-20 h-20 object-contain mx-auto rounded shadow" alt="Imagen del producto"/>
+                            </td>
                             <td class="px-4 py-3">
                                 <div class="flex justify-center gap-2">
                                     <a href="verProducto.jsp?id=1" class="text-lg hover:text-blue-600">👁️</a>
@@ -77,6 +87,7 @@
                                 </div>
                             </td>
                         </tr>
+                        <%}%>
                     </tbody>
                 </table>
             </div>

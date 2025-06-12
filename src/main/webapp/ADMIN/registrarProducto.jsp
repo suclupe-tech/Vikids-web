@@ -1,6 +1,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ page import="DAO.ProductoDAO" %>
+<%@ page import="MODELO.Producto" %>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -31,7 +34,7 @@
                     Crear Nuevo Producto
                 </h3>
 
-                <form method="post" enctype="multipart/form-data" action="crearProducto.jsp" class="space-y-6">
+                <form method="post" enctype="multipart/form-data" action="RegistrarProducto" class="space-y-6">
                     <div class="grid md:grid-cols-3 gap-4">
                         <div>
                             <label for="codigo" class="block text-sm font-medium text-gray-700">Código</label>
