@@ -27,7 +27,7 @@
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="bg-white text-gray-800">
-        <%@ include file="CODIGO-REUTILIZABLE/header.jsp" %>
+        <%@ include file="../includes/header.jsp" %>
 
         <main class="max-w-lg mx-auto px-4 py-12">
             <h1 class="text-3xl font-bold text-center text-pink-600 mb-8">Contáctanos</h1>
@@ -71,8 +71,8 @@
             </form>
         </main>
 
-        <%@ include file="CODIGO-REUTILIZABLE/footer.jsp" %>
-        <%@include file="CODIGO-REUTILIZABLE/modalCarrito.jsp" %>
+            <%@ include file="../includes/footer.jsp" %>
+            <%@include file="../includes/modalCarrito.jsp" %>
         
     </body>
 </html>

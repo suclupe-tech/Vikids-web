@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@page import="DAO.ProductoDAO, MODELO.Producto, java.util.List" %>
+<%@page import="vikids.dao.ProductoDAO, vikids.modelo.Producto, java.util.List" %>
 <%
     ProductoDAO dao = new ProductoDAO();
     List<Producto> lista = dao.listar();
@@ -24,7 +24,7 @@
     </head>
     <body>
 
-        <%@include file="../CODIGO-REUTILIZABLE/adminPrincipal.jsp" %>
+        <%@include file="../includes/adminPrincipal.jsp" %>
         <!-- Contenido principal -->
         <div id="mainContent" class="ml-64 mt-20 p-6">
             <h5 class="text-2xl font-semibold mb-4">Lista de Productos</h5>
@@ -106,5 +106,6 @@
         </div>
 
         <script src="../JS/dasboard.js"></script>
+        <script src="../JS/menuUsuario.js"></script>
     </body>
 </html>

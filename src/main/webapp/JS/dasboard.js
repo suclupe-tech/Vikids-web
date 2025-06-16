@@ -4,20 +4,49 @@
  */
 const menuToggle = document.getElementById("menuToggle");
 const sidebar = document.getElementById("sidebar");
-const content = document.getElementById("mainContent");
+const mainContent = document.getElementById("mainContent");
+const overlay = document.getElementById("overlay");
 
-menuToggle.addEventListener("click", () => {
-    sidebar.classList.toggle("hidden"); // oculta o muestra el sidebar
+// Función para abrir sidebar
+function openSidebar() {
+    sidebar.classList.remove("-translate-x-full");
+    mainContent.classList.add("ml-64");
+    overlay.classList.remove("hidden");
+}
 
-    // Ajusta el margen del contenido
-    if (sidebar.classList.contains("hidden")) {
-        content.classList.remove("ml-64");
-        content.classList.add("ml-0");
+// Función para cerrar sidebar
+function closeSidebar() {
+    sidebar.classList.add("-translate-x-full");
+    mainContent.classList.remove("ml-64");
+    overlay.classList.add("hidden");
+}
+
+// Toggle con el botón
+menuToggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    if (sidebar.classList.contains("-translate-x-full")) {
+        openSidebar();
     } else {
-        content.classList.remove("ml-0");
-        content.classList.add("ml-64");
+        closeSidebar();
     }
 });
+
+// Cerrar si se hace clic en overlay
+overlay.addEventListener("click", closeSidebar);
+
+// Cerrar si se hace clic fuera del sidebar
+document.addEventListener("click", (e) => {
+    if (!sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
+        closeSidebar();
+    }
+});
+
+// Evitar que clics dentro del sidebar lo cierren
+sidebar.addEventListener("click", (e) => {
+    e.stopPropagation();
+});
+
+
 
 document.querySelectorAll('.menu-link').forEach(link => {
     link.addEventListener('click', function (e) {

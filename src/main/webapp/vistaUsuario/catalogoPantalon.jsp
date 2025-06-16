@@ -11,7 +11,7 @@
         <script src="https://cdn.tailwindcss.com"></script>
     </head>
     <body class="bg-white text-gray-800">
-        <%@include file="CODIGO-REUTILIZABLE/header.jsp" %>
+        <%@include file="../includes/header.jsp" %>
 
         <!-- Productos pantalon-->
         <div class="container mx-auto px-4 mt-10">
@@ -19,7 +19,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="productos">
                 <!-- Ejemplo producto -->
                 <div class="producto bg-white border rounded-lg shadow hover:shadow-md transition p-4" data-categoria="pantalones">
-                    <img src="imagen/alb1.jpg" alt="Pantalón" class="w-full h-70 object-cover rounded-md mb-3">
+                    <img src="../imagen/alb1.jpg" alt="Pantalón" class="w-full h-70 object-cover rounded-md mb-3">
                     <h2 class="titulo-prod text-lg font-semibold text-gray-800">Pantalón Niña Azul</h2>
                     <p class="precio-prod text-pink-600 font-bold text-sm mb-2">S/ 39.90</p>
                     <div class="flex justify-between mt-3">
@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="producto bg-white border rounded-lg shadow hover:shadow-md transition p-4" data-categoria="polos">
-                    <img src="imagen/alb2.jpg" alt="Polo" class="w-full h-70 object-cover rounded-md mb-3">
+                    <img src="../imagen/alb2.jpg" alt="Polo" class="w-full h-70 object-cover rounded-md mb-3">
                     <h2 class="titulo-prod text-lg font-semibold text-gray-800">Polo Rosado</h2>
                     <p class="precio-prod text-pink-600 font-bold text-sm mb-2">S/ 24.90</p>
                     <div class="flex justify-between mt-3">
@@ -53,10 +53,10 @@
                 <!-- Puedes seguir duplicando esta estructura para más productos -->
             </div>
         </div>
-        <%@include file="CODIGO-REUTILIZABLE/modalCarrito.jsp" %>
-        <%@include file="CODIGO-REUTILIZABLE/footer.jsp" %>
-        <%@include file="CODIGO-REUTILIZABLE/modalProducto.jsp" %>
-        <script src="JS/index.js"></script>
+        <%@include file="../includes/modalCarrito.jsp" %>
+        <%@include file="../includes/footer.jsp" %>
+        <%@include file="../includes/modalProducto.jsp" %>
+        <script src="../JS/index.js"></script>
     </body>
 
 </html>

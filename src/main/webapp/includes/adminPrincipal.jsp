@@ -5,37 +5,38 @@
     </span>
     <img src="../imagen/logo 3d vikid.png" alt="Logo" class="h-14 mr-4">
     <h2 class="text-black text-2xl font-semibold">Sistema de Ventas</h2>
-    <div x-data="{ open: false }" class="relative ml-auto">
-        <button @click="open = !open" class="flex items-center font-bold">
-            <i class="bi bi-person-circle text-2xl mr-1"></i>
-            <span>Admin</span>
+
+    <div class="relative ml-auto">
+        <button id="adminButton" class="flex items-center font-bold">
+            <i class="bi bi-person-circle text-2xl mr-1 text-black"></i>
+            <span class="text-black">Admin</span>
         </button>
 
         <!-- Menú -->
         <ul 
-            x-show="open"
-            @click.away="open = false"
-            x-transition
-            class="absolute right-0 mt-2 w-40 bg-white text-black rounded shadow-md z-50"
-            style="display: none;"
-            >
-            <li><a class="block px-4 py-2 hover:bg-gray-100" href="perfil.jsp">
+            id="adminMenu"
+            class="absolute right-0 mt-2 w-40 bg-white text-black rounded shadow-md z-50 hidden"
+        >
+            <li>
+                <a class="block px-4 py-2 hover:bg-gray-100" href="perfil.jsp">
                     <img src="../imagen/usuario (1).png" alt="usuario" class="h-5 mr-4" />
                     Perfil
-                </a></li>
+                </a>
+            </li>
             <li><hr class="border-gray-200 my-1"></li>
-            <li><a class="block px-4 py-2 hover:bg-gray-100" href="index.jsp">
+            <li>
+                <a class="block px-4 py-2 hover:bg-gray-100" href="../vistaAdmin/admin.jsp">
                     <img src="../imagen/cerrar-sesion.png" alt="alt" class="h-5 mr-4"/>
                     Cerrar Sesion
-                </a></li>
+                </a>
+            </li>
         </ul>
     </div>
-
-
 </div>
 
 <!-- Sidebar -->
 <aside id="sidebar" class="fixed top-14 left-0 w-64 bg-gray-800 text-white h-full p-4 space-y-2 z-40">
+    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-30"></div>
     <!-- ejemplo de submenú -->
     <a href="#" class="block px-4 py-2 font-semibold hover:bg-gray-700 transition-all" data-target="submenuInicio">Inicio</a>
     <div id="submenuInicio" class="pl-4 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
@@ -46,7 +47,7 @@
     <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuProducto">Producto</a>
     <div id="submenuProducto" class="submenu ml-4 space-y-2 hidden transition-all duration-300">
         <a href="registrarProducto.jsp" class="block hover:bg-gray-700 text-blue-400">Nuevo Producto</a>
-        <a href="../ADMIN/dashboard.jsp" class="block hover:bg-gray-700 text-blue-400">Listar Productos</a>
+        <a href="../vistaAdmin/dashboard.jsp" class="block hover:bg-gray-700 text-blue-400">Listar Productos</a>
         <a href="categorias.jsp" class="block hover:bg-gray-700 text-blue-400">Categorías</a>
     </div>
 

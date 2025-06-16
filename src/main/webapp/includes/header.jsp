@@ -9,7 +9,7 @@
 
         <!-- Logo -->
         <a href="#" class="flex items-center space-x-3">
-            <img src="imagen/logo vk png.png" alt="Logo" class="w-20">
+            <img src="../imagen/logo vk png.png" alt="Logo" class="w-20">
                 <span class="font-bold text-xl">Vikids</span>
         </a>
 
