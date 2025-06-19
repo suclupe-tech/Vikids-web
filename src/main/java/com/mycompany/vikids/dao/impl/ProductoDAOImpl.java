@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package vikids.dao.impl;
+package com.mycompany.vikids.dao.impl;
 
-import vikids.util.conexionSQL;
-import vikids.modelo.Producto;
+import com.mycompany.vikids.util.conexionSQL;
+import com.mycompany.vikids.modelo.Producto;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import vikids.dao.ProductoDAO;
+import com.mycompany.vikids.dao.ProductoDAO;
 
 public class ProductoDAOImpl implements ProductoDAO {
 
@@ -64,7 +64,31 @@ public class ProductoDAOImpl implements ProductoDAO {
 
     @Override
     public List<Producto> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+        List<Producto> lista = new ArrayList<>();
+        String sql = "SELECT * FROM producto";
 
+        try (Connection connection = conn.getConnection(); PreparedStatement ps = connection.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Producto producto = new Producto();
+                producto.setId(rs.getInt("id"));
+                producto.setCodigo(rs.getString("codigo"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setPrecio(rs.getDouble("precio"));
+                producto.setCategoria(rs.getString("categoria"));
+                producto.setMarca(rs.getString("marca"));
+                producto.setUnidad(rs.getString("unidad"));
+                producto.setImagen(rs.getString("imagen"));
+
+                lista.add(producto);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Error al listar productos: " + e.getMessage());
+        }
+
+        return lista;
+    }
 }

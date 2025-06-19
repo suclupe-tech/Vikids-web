@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package vikids.controlador;
+package com.mycompany.vikids.controlador;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
@@ -12,9 +12,9 @@ import java.io.*;
 import java.nio.file.Paths;
 import java.rmi.ServerError;
 import java.rmi.ServerException;
-import vikids.modelo.Producto;
-import vikids.dao.impl.ProductoDAOImpl;
-import vikids.util.conexionSQL;
+import com.mycompany.vikids.modelo.Producto;
+import com.mycompany.vikids.dao.impl.ProductoDAOImpl;
+import com.mycompany.vikids.util.conexionSQL;
 
 /**
  *

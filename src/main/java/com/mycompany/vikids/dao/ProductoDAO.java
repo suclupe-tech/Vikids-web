@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package vikids.dao;
+package com.mycompany.vikids.dao;
 
 import java.util.List;
-import vikids.modelo.Producto;
+import com.mycompany.vikids.modelo.Producto;
 
 public interface ProductoDAO {
     

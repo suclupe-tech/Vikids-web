@@ -1,3 +1,5 @@
+
+
 <!-- Topbar -->
 <div class="fixed top-0 left-0 right-0 bg-[#E0BBE4] text-white flex items-center px-4 py-2 shadow z-50">
     <span id="menuToggle" class="text-black text-3xl cursor-pointer mr-4">
@@ -9,7 +11,7 @@
     <div class="relative ml-auto">
         <button id="adminButton" class="flex items-center font-bold">
             <i class="bi bi-person-circle text-2xl mr-1 text-black"></i>
-            <span class="text-black">Admin</span>
+            <span class="text-black"><%= usuario %></span>
         </button>
 
         <!-- Menú -->
@@ -25,7 +27,7 @@
             </li>
             <li><hr class="border-gray-200 my-1"></li>
             <li>
-                <a class="block px-4 py-2 hover:bg-gray-100" href="../vistaAdmin/admin.jsp">
+                <a class="block px-4 py-2 hover:bg-gray-100" href="../../LogoutServlet">
                     <img src="../imagen/cerrar-sesion.png" alt="alt" class="h-5 mr-4"/>
                     Cerrar Sesion
                 </a>

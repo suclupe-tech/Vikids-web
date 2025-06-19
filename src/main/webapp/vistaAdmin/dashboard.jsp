@@ -4,13 +4,27 @@
     Author     : USER
 --%>
 
+<%@page import="com.mycompany.vikids.dao.impl.ProductoDAOImpl"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@page import="vikids.dao.ProductoDAO, vikids.modelo.Producto, java.util.List" %>
+<%@page import="com.mycompany.vikids.dao.impl.ProductoDAOImpl" %>
+<%@page import="com.mycompany.vikids.modelo.Producto" %>
+<%@page import="com.mycompany.vikids.util.conexionSQL" %>
+<%@page import="java.util.List" %>
+
+<%HttpSession sesion = request.getSession(false);
+    String usuario = (sesion != null) ? (String) sesion.getAttribute("usuario") : null;
+    if (usuario == null) {
+        response.sendRedirect("admin.jsp");
+        return;
+    }
+%>
+
 <%
-    ProductoDAO dao = new ProductoDAO();
-    List<Producto> lista = dao.listar();
-    %>
+    ProductoDAOImpl dao = new ProductoDAOImpl(new conexionSQL());
+    List<Producto> lista = dao.listarTodos();
+%>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -28,6 +42,7 @@
         <!-- Contenido principal -->
         <div id="mainContent" class="ml-64 mt-20 p-6">
             <h5 class="text-2xl font-semibold mb-4">Lista de Productos</h5>
+            <h3 class="text-xl font-semibold mb-2">Bienvenido, <%= usuario%> 👋</h3>
 
             <!-- Barra de herramientas -->
             <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">

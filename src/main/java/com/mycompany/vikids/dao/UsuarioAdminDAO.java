@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package vikids.dao;
+package com.mycompany.vikids.dao;
 
 import java.util.List;
-import vikids.modelo.UsuarioAdmin;
+import com.mycompany.vikids.modelo.UsuarioAdmin;
 
 public interface UsuarioAdminDAO {
    boolean insert(UsuarioAdmin usuario);
@@ -14,4 +14,5 @@ public interface UsuarioAdminDAO {
    UsuarioAdmin buscarPorId(int idUsuario);
    List<UsuarioAdmin> buscarPorNombre(String nombre);
    List<UsuarioAdmin> listarTodos();
+   boolean autenticar (String usuario, String contraseña);
 }

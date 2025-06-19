@@ -2,14 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package vikids.modelo;
+package com.mycompany.vikids.modelo;
 
 public class UsuarioAdmin {
     private int id;
     private String nombre;
     private String apellido;
     private String usuario;
-    private String password;
+    private String contraseña;
     private String telefono;
 
     public UsuarioAdmin() {
@@ -21,7 +21,7 @@ public class UsuarioAdmin {
         this.nombre = nombre;
         this.apellido = apellido;
         this.usuario = usuario;
-        this.password = password;
+        this.contraseña = password;
         this.telefono = telefono;
     }
 
@@ -57,12 +57,12 @@ public class UsuarioAdmin {
         this.usuario = usuario;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContraseña(String password) {
+        this.contraseña = password;
     }
 
     public String getTelefono() {

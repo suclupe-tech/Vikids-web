@@ -14,6 +14,26 @@
         <title>Login Admin</title>
     </head>
     <body>
+
+        <% String error = (String) request.getAttribute("error");
+            if (error != null) {
+        %>
+        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+            <%= error%>
+        </div>
+        <% } %>
+
+
+        <%
+            String logoutMsg = request.getParameter("logout");
+            if ("1".equals(logoutMsg)) {
+        %>
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+            Sesión cerrada correctamente.
+        </div>
+        <%
+            }
+        %>
         <!-- Encabezado con logo -->
         <div class="bg-[#E6DAF0] px-4 py-4 flex justify-center items-center">
             <img src="../imagen/logo 3d vikid.png" alt="Logo de la Empresa" class="h-[60px]">
@@ -21,16 +41,16 @@
 
         <!-- Formulario responsive centrado -->
         <div class="flex justify-center mt-10 px-4">
-            <form id="loginForm" class="w-full max-w-md bg-white shadow-xl rounded-lg p-8">
+            <form id="loginForm" method="post" action="/SistemaVikids/vistaAdmin/LoginUsuarioAdmin" class="w-full max-w-md bg-white shadow-xl rounded-lg p-8">
                 <h2 class="text-2xl font-semibold text-center mb-6">Iniciar Sesión</h2>
 
                 <!-- Usuario -->
-                <input type="text" id="txtusuario" name="txtusuario" placeholder="Ingrese Usuario" required
+                <input type="text" id="txtusuario" name="username" placeholder="Ingrese Usuario" required
                        class="w-full mt-2 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-400"/>
                 <p id="errorUsuario" class="text-sm text-red-500 mt-1 hidden">Por favor, ingrese un usuario.</p>
 
                 <!-- Contraseña -->
-                <input type="password" id="txtclave" name="txtclave" placeholder="Ingrese Clave" required
+                <input type="password" id="txtclave" name="password" placeholder="Ingrese Clave" required
                        class="w-full mt-4 px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-400"/>
                 <p id="errorClave" class="text-sm text-red-500 mt-1 hidden">Por favor, ingrese su clave.</p>
 
@@ -53,11 +73,11 @@
                 </button>
 
                 <!-- Enlace -->
-                <div class="mt-4 text-left">
+                <!--<div class="mt-4 text-left">
                     <a href="dashboard.jsp" class="text-blue-600 hover:underline text-sm">
                         ¿No tienes cuenta? Crear una
                     </a>
-                </div>
+                </div>-->
             </form>
         </div>
         <script src="../JS/admin.js"></script>
