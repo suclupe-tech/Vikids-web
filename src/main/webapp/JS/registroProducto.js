@@ -15,33 +15,37 @@ function previewImage(event) {
     }
 }
 function toggleNuevaMarca() {
-    const selectMarca = document.getElementById("marca");
-    const inputNuevaMarca = document.getElementById("nuevaMarca");
-
-    if (selectMarca.value === "otra") {
-        inputNuevaMarca.style.display = "block";
-        inputNuevaMarca.required = true;
-    } else {
-        inputNuevaMarca.style.display = "none";
-        inputNuevaMarca.required = false;
-        inputNuevaMarca.value = "";
-    }
-}
-function toggleNuevaMarca() {
     const select = document.getElementById("marca");
     const input = document.getElementById("nuevaMarca");
-    input.style.display = (select.value === "otra") ? "block" : "none";
-    input.required = (select.value === "otra");
-    if (select.value !== "otra")
+
+    if (select.value === "otra") {
+        input.classList.remove("hidden");
+        input.setAttribute("name", "marca");   // activamos el input
+        select.removeAttribute("name");        // desactivamos el select
+        input.required = true;
+    } else {
+        input.classList.add("hidden");
+        input.removeAttribute("name");         // desactivamos el input
+        select.setAttribute("name", "marca");  // activamos el select
+        input.required = false;
         input.value = "";
+    }
 }
 
 function toggleNuevaCategoria() {
     const select = document.getElementById("categoria");
     const input = document.getElementById("nuevaCategoria");
-    input.style.display = (select.value === "otra") ? "block" : "none";
-    input.required = (select.value === "otra");
-    if (select.value !== "otra")
-        input.value = "";
-}
 
+    if (select.value === "otra") {
+        input.classList.remove("hidden");
+        input.setAttribute("name", "categoria");
+        select.removeAttribute("name");
+        input.required = true;
+    } else {
+        input.classList.add("hidden");
+        input.removeAttribute("name");
+        select.setAttribute("name", "categoria");
+        input.required = false;
+        input.value = "";
+    }
+}

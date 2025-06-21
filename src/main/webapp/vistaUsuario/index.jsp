@@ -53,7 +53,7 @@
                     <img src="../imagen/image1.png" class="mx-auto shadow-2xl h-70 w-full object-cover rounded mb-4" alt="Pantalón">
                     <h5 class="titulo-prod font-semibold text-lg">Pantalón Jean para Niña</h5>
                     <p class="descripcion-prod text-sm mb-4">Comodidad y estilo para todas las edades. Disponible en varias tallas.</p>
-                    <button onclick="abrirModalProducto('image1.png', 'Pantalón Jean para Niña', 'Comodidad y estilo para todas las edades. Disponible en varias tallas.', 'S/ 79.90')" 
+                    <button onclick="abrirModalProducto('../imagen/image1.png', 'Pantalón Jean para Niña', 'Comodidad y estilo para todas las edades. Disponible en varias tallas.', 'S/ 79.90')" 
                             class="mt-3 bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600 transition">
                         Ver detalles
                     </button>
@@ -69,7 +69,7 @@
                     <img src="../imagen/image2.png" class="mx-auto shadow-2xl h-70 w-full object-cover rounded mb-4" alt="Polo">
                     <h5 class="font-semibold text-lg">Polo de Algodón para Niña</h5>
                     <p class="text-sm mb-4">Suave al tacto y con diseños coloridos. Ideal para el verano.</p>
-                    <button onclick="abrirModalProducto('image2.png', 'Polo de Algodón para Niña', 'Suave al tacto y con diseños coloridos. Ideal para el verano.', 'S/ 20.00')" 
+                    <button onclick="abrirModalProducto('../imagen/image2.png', 'Polo de Algodón para Niña', 'Suave al tacto y con diseños coloridos. Ideal para el verano.', 'S/ 20.00')" 
                             class="mt-3 bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600 transition">
                         Ver detalles
                     </button>
@@ -85,7 +85,7 @@
                     <img src="../imagen/image3.png" class="mx-auto shadow-2xl h-70 w-full object-cover rounded mb-4" alt="Short">
                     <h5 class="titulo-prod font-semibold text-lg">Short Casual para Niña</h5>
                     <p class="descripcion-prod text-sm mb-4">Frescos y cómodos. Perfectos para días calurosos y juegos al aire libre.</p>
-                    <button onclick="abrirModalProducto('image3.png', 'Short Casual para Niña', 'Frescos y cómodos. Perfectos para días calurosos y juegos al aire libre.', 'S/ 45.00')" 
+                    <button onclick="abrirModalProducto('../imagen/image3.png', 'Short Casual para Niña', 'Frescos y cómodos. Perfectos para días calurosos y juegos al aire libre.', 'S/ 45.00')" 
                             class="mt-3 bg-pink-500 text-white px-4 py-2 rounded-full hover:bg-pink-600 transition">
                         Ver detalles
                     </button>

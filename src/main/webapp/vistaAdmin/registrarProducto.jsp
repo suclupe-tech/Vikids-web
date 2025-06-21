@@ -1,8 +1,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<%@ page import="vikids.dao.ProductoDAO" %>
-<%@ page import="vikids.modelo.Producto" %>
+<%@ page import="com.mycompany.vikids.dao.ProductoDAO" %>
+<%@ page import="com.mycompany.vikids.modelo.Producto" %>
 
 <html>
     <head>
@@ -34,7 +34,7 @@
                     Crear Nuevo Producto
                 </h3>
 
-                <form method="post" enctype="multipart/form-data" action="RegistrarProducto" class="space-y-6">
+                <form id="registroProducto" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/RegistrarProducto" class="space-y-6">
                     <div class="grid md:grid-cols-3 gap-4">
                         <div>
                             <label for="codigo" class="block text-sm font-medium text-gray-700">Código</label>
@@ -43,6 +43,12 @@
                         <div>
                             <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
                             <input type="text" id="nombre" name="nombre" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500">
+                        </div>
+                        <div class="md:col-span-3">
+                            <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
+                            <textarea id="descripcion" name="descripcion" rows="3"
+                                      class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
+                                      placeholder="Escribe una descripción del producto..."></textarea>
                         </div>
                         <div>
                             <label for="stock" class="block text-sm font-medium text-gray-700">Stock</label>
@@ -65,7 +71,7 @@
                                 <option value="Accesorios">Accesorios</option>
                                 <option value="otra">Otra...</option>
                             </select>
-                            <input type="text" id="nuevaCategoria" name="nuevaCategoria" placeholder="Escribe nueva categoría" class="mt-2 hidden border border-gray-300 rounded-md p-2 w-full">
+                            <input type="text" id="categoria" name="categoria" placeholder="Escribe nueva categoría" class="mt-2 hidden border border-gray-300 rounded-md p-2 w-full">
                         </div>
 
                         <div>
@@ -77,7 +83,7 @@
                                 <option value="PequeStyle">PequeStyle</option>
                                 <option value="otra">Otra...</option>
                             </select>
-                            <input type="text" id="nuevaMarca" name="nuevaMarca" placeholder="Escribe nueva marca" class="mt-2 hidden border border-gray-300 rounded-md p-2 w-full">
+                            <input type="text" id="nuevaMarca" name="marca" placeholder="Escribe nueva marca" class="mt-2 hidden border border-gray-300 rounded-md p-2 w-full">
                         </div>
                     </div>
 
@@ -97,6 +103,15 @@
                             <div class="mt-3">
                                 <img id="preview-img" src="#" alt="Vista previa" class="hidden max-h-40 object-contain">
                             </div>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div>
+                            <label for="activo" class="block text-sm font-medium text-gray-700">Estado</label>
+                            <select id="activo" name="activo" required class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500">
+                                <option value="1">Activo</option>
+                                <option value="0">Inactivo</option>
+                            </select>
                         </div>
                     </div>
 
@@ -121,5 +136,6 @@
         <script src="../JS/dasboard.js"></script>
         <script src="../JS/registroProducto.js"></script>
     </body>
+    <div id="toast" class="fixed top-4 right-4 hidden p-4 rounded-xl shadow-lg text-white z-50"></div>
 
 </html>

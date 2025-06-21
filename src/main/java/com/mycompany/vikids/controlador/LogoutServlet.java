@@ -20,14 +20,19 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession sesion = request.getSession(false);
         if (sesion != null) {
-            String usuario = (String) sesion.getAttribute("usuario");
-            LoginCache.sessionCache.invalidate(usuario);
+            Object usuarioObj = sesion.getAttribute("usuario");
+            if (usuarioObj != null) {
+                String usuario = usuarioObj.toString();
+                if (LoginCache.sessionCache != null) {
+                    LoginCache.sessionCache.invalidate(usuario);
+                }
+            }
             sesion.invalidate();
         }
-        response.sendRedirect("admin.jsp?logout=1");
+        response.sendRedirect(request.getContextPath() + "/vistaAdmin/admin.jsp?logout=1");
     }
 
     /**
@@ -38,6 +43,4 @@ public class LogoutServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
-
 }

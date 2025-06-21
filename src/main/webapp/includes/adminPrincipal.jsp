@@ -11,14 +11,14 @@
     <div class="relative ml-auto">
         <button id="adminButton" class="flex items-center font-bold">
             <i class="bi bi-person-circle text-2xl mr-1 text-black"></i>
-            <span class="text-black"><%= usuario %></span>
+            <span class="text-black"><%= (session.getAttribute("usuario") != null) ? session.getAttribute("usuario") : "Administrador"%></span>
         </button>
 
         <!-- Menú -->
         <ul 
             id="adminMenu"
             class="absolute right-0 mt-2 w-40 bg-white text-black rounded shadow-md z-50 hidden"
-        >
+            >
             <li>
                 <a class="block px-4 py-2 hover:bg-gray-100" href="perfil.jsp">
                     <img src="../imagen/usuario (1).png" alt="usuario" class="h-5 mr-4" />
@@ -27,7 +27,7 @@
             </li>
             <li><hr class="border-gray-200 my-1"></li>
             <li>
-                <a class="block px-4 py-2 hover:bg-gray-100" href="../../LogoutServlet">
+                <a class="block px-4 py-2 hover:bg-gray-100" href="<%= request.getContextPath()%>/LogoutServlet">
                     <img src="../imagen/cerrar-sesion.png" alt="alt" class="h-5 mr-4"/>
                     Cerrar Sesion
                 </a>
@@ -40,40 +40,62 @@
 <aside id="sidebar" class="fixed top-14 left-0 w-64 bg-gray-800 text-white h-full p-4 space-y-2 z-40">
     <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-30"></div>
     <!-- ejemplo de submenú -->
-    <a href="#" class="block px-4 py-2 font-semibold hover:bg-gray-700 transition-all" data-target="submenuInicio">Inicio</a>
+    <a href="#" class="block px-4 py-2 font-semibold hover:bg-gray-700 transition-all" data-target="submenuInicio">
+        <i class="bi bi-house-door mr-2"></i>Inicio</a>
     <div id="submenuInicio" class="pl-4 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
         <a href="admin.jsp" class="block py-1 hover:text-blue-600 text-blue-400">Panel principal</a>
         <a href="perfil.jsp" class="block py-1 hover:text-blue-600 text-blue-400">Perfil</a>
     </div>
 
-    <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuProducto">Producto</a>
+    <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuProducto">
+        <i class="bi bi-box-seam mr-2"></i>Producto</a>
     <div id="submenuProducto" class="submenu ml-4 space-y-2 hidden transition-all duration-300">
-        <a href="registrarProducto.jsp" class="block hover:bg-gray-700 text-blue-400">Nuevo Producto</a>
-        <a href="../vistaAdmin/dashboard.jsp" class="block hover:bg-gray-700 text-blue-400">Listar Productos</a>
-        <a href="categorias.jsp" class="block hover:bg-gray-700 text-blue-400">Categorías</a>
+        <a href="registrarProducto.jsp" class="block hover:bg-gray-700 text-blue-400">
+            <i class="bi bi-plus-circle mr-2"></i>Nuevo Producto</a>
+        <a href="../vistaAdmin/dashboard.jsp" class="block hover:bg-gray-700 text-blue-400">
+            <i class="bi bi-box-seam mr-2"></i>Listar Productos</a>
+        <a href="${pageContext.request.contextPath}/ListarInactivos"
+           class="block hover:bg-gray-700 text-blue-400">
+            <i class="bi bi-box-seam mr-2"></i> Productos Inactivos
+        </a>
+
+        <a href="categorias.jsp" class="block hover:bg-gray-700 text-blue-400">
+            <i class="bi bi-folder2-open"></i>Categorías</a>
     </div>
 
-    <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuInventario">Inventario</a>
+    <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuInventario">
+        <i class="bi bi-boxes mr-2"></i>Inventario</a>
     <div id="submenuInventario" class="submenu ml-4 space-y-2 hidden transition-all duration-300">
-        <a href="verInventario.jsp" class="block hover:bg-gray-700 text-blue-400">Ver Inventario</a>
-        <a href="agregarStock.jsp" class="block hover:bg-gray-700 text-blue-400">Agregar Stock</a>
+        <a href="verInventario.jsp" class="block hover:bg-gray-700 text-blue-400 ">
+            <i class="bi bi-box-seam mr-2"></i>Ver Inventario</a>
+        <a href="agregarStock.jsp" class="block hover:bg-gray-700 text-blue-400">
+            <i class="bi bi-boxes mr-2"></i>Agregar Stock</a>
     </div>
 
-    <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuVentas">Ventas</a>
+    <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuVentas">
+        <i class="bi bi-cart-check mr-2"></i>Ventas</a>
     <div id="submenuVentas" class="submenu ml-4 space-y-2 hidden transition-all duration-300">
-        <a href="nuevaVenta.jsp" class="block hover:bg-gray-700 text-blue-400">Nueva Venta</a>
-        <a href="historialVentas.jsp" class="block hover:bg-gray-700 text-blue-400">Historial de Ventas</a>
+        <a href="nuevaVenta.jsp" class="block hover:bg-gray-700 text-blue-400">
+            <i class="bi bi-plus-circle mr-2"></i>Nueva Venta</a>
+        <a href="historialVentas.jsp" class="block hover:bg-gray-700 text-blue-400">
+            <i class="bi bi-clock-history mr-2"></i>Historial de Ventas</a>
     </div>
 
-    <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuMantenimiento">Mantenimiento</a>
+    <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuMantenimiento">
+        <i class="bi bi-tools mr-2"></i>Mantenimiento</a>
     <div id="submenuMantenimiento" class="submenu ml-4 space-y-2 hidden transition-all duration-300">
-        <a href="usuarios.jsp" class="block hover:bg-gray-700 text-blue-400">Usuarios</a>
-        <a href="clientes.jsp" class="block hover:bg-gray-700 text-blue-400">Clientes</a>
-        <a href="configuracion.jsp" class="block hover:bg-gray-700 text-blue-400">Configuración</a>
+        <a href="usuarios.jsp" class="block hover:bg-gray-700 text-blue-400">
+            <i class="bi bi-person mr-2"></i>Usuarios</a>
+        <a href="clientes.jsp" class="block hover:bg-gray-700 text-blue-400">
+            <i class="bi bi-people mr-2"></i>Clientes</a>
+        <a href="configuracion.jsp" class="block hover:bg-gray-700 text-blue-400">
+            <i class="bi bi-gear mr-2"></i>Configuración</a>
     </div>
 
-    <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuSalir">Salir</a>
+    <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuSalir">
+        <i class="bi bi-box-arrow-right mr-2"></i>Salir</a>
     <div id="submenuSalir" class="submenu ml-4 space-y-2 hidden transition-all duration-300">
-        <a href="index.jsp" class="block hover:bg-gray-700 text-blue-400">Cerrar sesión</a>
+        <a href="index.jsp" class="block hover:bg-gray-700 text-blue-400">
+            <i class="bi bi-box-arrow-right mr-2"></i>Cerrar sesión</a>
     </div>
 </aside>

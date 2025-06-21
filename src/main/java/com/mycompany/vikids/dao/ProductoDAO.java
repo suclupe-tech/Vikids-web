@@ -15,4 +15,9 @@ public interface ProductoDAO {
    Producto buscarPorCodigo(String codigo);
    List<Producto> buscarPorNombre(String nombre);
    List<Producto> listarTodos();
+   List<Producto> listarPaginado(int offset, int limit);
+   int contarProductos();
+   boolean desactivar(String codigo);
+   boolean reactivar(String codigo);
+   List<Producto> listarInactivos();
 }

@@ -15,13 +15,14 @@ import java.rmi.ServerException;
 import com.mycompany.vikids.modelo.Producto;
 import com.mycompany.vikids.dao.impl.ProductoDAOImpl;
 import com.mycompany.vikids.util.conexionSQL;
+import net.coobird.thumbnailator.Thumbnails;
 
-/**
- *
- * @author USER
- */
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024, // 1 MB
+        maxFileSize = 1024 * 1024 * 10, // 10 MB por archivo
+        maxRequestSize = 1024 * 1024 * 20 // 20 MB en total
+)
 @WebServlet(name = "RegistrarProducto", urlPatterns = {"/RegistrarProducto"})
-@MultipartConfig
 public class RegistrarProducto extends HttpServlet {
 
     /**
@@ -39,20 +40,33 @@ public class RegistrarProducto extends HttpServlet {
             String codigo = request.getParameter("codigo");
             String nombre = request.getParameter("nombre");
             String descripcion = request.getParameter("descripcion");
-            int stock = Integer.parseInt(request.getParameter("stock"));
-            double precio = Double.parseDouble("precio");
-            String categoria = request.getParameter("categoria");
-            String marca = request.getParameter("marca");
-            String unidad = request.getParameter("unidad");
-            Part archivoImagen = request.getPart("imagen");
-            String nombreArchivo = Paths.get(archivoImagen.getSubmittedFileName()).getFileName().toString();
+            String stockStr = request.getParameter("stock");
+            int stock = (stockStr != null && !stockStr.isEmpty()) ? Integer.parseInt(stockStr) : 0;
 
+            String precioStr = request.getParameter("precio");
+            double precio = (precioStr != null && !precioStr.isEmpty()) ? Double.parseDouble(precioStr) : 0.0;
+
+            String categoria = getValue(request.getPart("categoria"));
+            String marca = getValue(request.getPart("marca"));
+            String unidad = getValue(request.getPart("unidad"));
+            String estadoStr = getValue(request.getPart("activo"));
+            boolean activo = "1".equals(estadoStr);
             String rutaCarpeta = getServletContext().getRealPath("/imagen");
             File carpetaImagenes = new File(rutaCarpeta);
             if (!carpetaImagenes.exists()) {
                 carpetaImagenes.mkdirs();
             }
-            archivoImagen.write(rutaCarpeta + File.separator + nombreArchivo);
+            Part archivoImagen = request.getPart("imagen");
+            String nombreArchivo = Paths.get(archivoImagen.getSubmittedFileName()).getFileName().toString();
+            if (archivoImagen != null && archivoImagen.getSize() > 0) {
+                InputStream input = archivoImagen.getInputStream();
+                File destino = new File(rutaCarpeta + File.separator + nombreArchivo);
+
+                Thumbnails.of(input)
+                        .size(800, 800) // Máximo 800x800 px
+                        .outputQuality(0.7f) // Calidad 70%
+                        .toFile(destino);
+            }
 
             Producto prod = new Producto();
             prod.setCodigo(codigo);
@@ -64,20 +78,32 @@ public class RegistrarProducto extends HttpServlet {
             prod.setMarca(marca);
             prod.setUnidad(unidad);
             prod.setImagen(nombreArchivo);
+            prod.setActivo(activo);
 
-            ProductoDAOImpl dao = new ProductoDAOImpl((conexionSQL) conexionSQL.conectar());
+            ProductoDAOImpl dao = new ProductoDAOImpl(conexionSQL.conectar());
             boolean exito = dao.insert(prod);
 
             if (exito) {
                 request.setAttribute("mensaje", "Producto registrado correctamente");
             } else {
                 request.setAttribute("error", "No se pudo registrar el producto");
-                request.getRequestDispatcher("registarProducto.jsp").forward(request, response);
+                request.getRequestDispatcher("vistaAdmin/registarProducto.jsp").forward(request, response);
             }
 
         } catch (Exception e) {
             e.printStackTrace();
             throw new ServerException("Error al registrar producto", e);
         }
+
+    }
+
+    private String getValue(Part part) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(part.getInputStream(), "UTF-8"));
+        StringBuilder value = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            value.append(line);
+        }
+        return value.toString();
     }
 }

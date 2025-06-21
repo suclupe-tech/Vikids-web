@@ -21,7 +21,7 @@
 %>
 
 <%
-    ProductoDAOImpl dao = new ProductoDAOImpl(new conexionSQL());
+    ProductoDAOImpl dao = new ProductoDAOImpl( conexionSQL.conectar());
     List<Producto> lista = dao.listarTodos();
 %>
 
@@ -50,7 +50,7 @@
                 <div class="w-full max-w-xl">
                     <div class="flex items-center bg-white border rounded-full shadow px-3 py-2">
                         <i class="bi bi-search text-gray-500 mr-2"></i>
-                        <input type="text" id="buscarInput" placeholder="Buscar producto..." class="w-full outline-none"/>
+                        <input type="text" id="buscador" placeholder="Buscar producto..." class="w-full outline-none"/>
                     </div>
                 </div>
 
@@ -98,7 +98,7 @@
                                 <div class="flex justify-center gap-2">
                                     <a href="verProducto.jsp?id=1" class="text-lg hover:text-blue-600">👁️</a>
                                     <a href="editarProducto.jsp?id=1" class="text-lg hover:text-yellow-600">✏️</a>
-                                    <button onclick="eliminarProducto(1)" class="text-lg hover:text-red-600">🗑️</button>
+                                    <a href="DesactivarProducto?codigo=<%=p.getCodigo()%>" onclick="return confirm('¿Estás seguro de desactivar este producto?')" class="text-lg hover:text-red-600">🚫</a>
                                 </div>
                             </td>
                         </tr>

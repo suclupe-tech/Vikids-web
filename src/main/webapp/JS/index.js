@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById('modalProducto');
     if (!modal) return;
 
-    document.getElementById('modalImagen').src = 'imagen/' + imagen;
+    document.getElementById('modalImagen').src = '/vistaUsuario/../imagen/' + imagen;
     document.getElementById('modalTitulo').textContent = titulo;
     document.getElementById('modalDescripcion').textContent = descripcion;
     document.getElementById('modalPrecio').textContent = precio;
