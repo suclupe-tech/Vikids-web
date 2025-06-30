@@ -10,7 +10,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.WebServlet;
 import java.io.*;
 import java.nio.file.Paths;
-import java.rmi.ServerError;
+import java.sql.Connection;
 import java.rmi.ServerException;
 import com.mycompany.vikids.modelo.Producto;
 import com.mycompany.vikids.dao.impl.ProductoDAOImpl;
@@ -46,10 +46,20 @@ public class RegistrarProducto extends HttpServlet {
             String precioStr = request.getParameter("precio");
             double precio = (precioStr != null && !precioStr.isEmpty()) ? Double.parseDouble(precioStr) : 0.0;
 
-            String categoria = getValue(request.getPart("categoria"));
-            String marca = getValue(request.getPart("marca"));
-            String unidad = getValue(request.getPart("unidad"));
-            String estadoStr = getValue(request.getPart("activo"));
+            String categoria = request.getParameter("categoria");
+            String nuevaCategoria = request.getParameter("nuevaCategoria");
+
+            if ("otra".equals(categoria) && nuevaCategoria != null && !nuevaCategoria.isBlank()) {
+                categoria = nuevaCategoria;
+            }
+            String marca = request.getParameter("marca");
+            String nuevaMarca = request.getParameter("nuevaMarca");
+
+            if ("otra".equals(marca) && nuevaMarca != null && !nuevaMarca.isBlank()) {
+                marca = nuevaMarca;
+            }
+            String unidad = request.getParameter("unidad");
+            String estadoStr = request.getParameter("activo");
             boolean activo = "1".equals(estadoStr);
             String rutaCarpeta = getServletContext().getRealPath("/imagen");
             File carpetaImagenes = new File(rutaCarpeta);
@@ -58,7 +68,7 @@ public class RegistrarProducto extends HttpServlet {
             }
             Part archivoImagen = request.getPart("imagen");
             String nombreArchivo = Paths.get(archivoImagen.getSubmittedFileName()).getFileName().toString();
-            if (archivoImagen != null && archivoImagen.getSize() > 0) {
+            if (archivoImagen != null && archivoImagen.getSize() > 0 && nombreArchivo != null && !nombreArchivo.isBlank()) {
                 InputStream input = archivoImagen.getInputStream();
                 File destino = new File(rutaCarpeta + File.separator + nombreArchivo);
 
@@ -80,14 +90,20 @@ public class RegistrarProducto extends HttpServlet {
             prod.setImagen(nombreArchivo);
             prod.setActivo(activo);
 
+            Connection conn = conexionSQL.conectar();
+            if (conn == null) {
+                throw new ServletException("No se pudo conectar a la base de datos");
+            }
+
             ProductoDAOImpl dao = new ProductoDAOImpl(conexionSQL.conectar());
             boolean exito = dao.insert(prod);
 
             if (exito) {
                 request.setAttribute("mensaje", "Producto registrado correctamente");
+                request.getRequestDispatcher("vistaAdmin/registrarProducto.jsp").forward(request, response);
             } else {
                 request.setAttribute("error", "No se pudo registrar el producto");
-                request.getRequestDispatcher("vistaAdmin/registarProducto.jsp").forward(request, response);
+                request.getRequestDispatcher("vistaAdmin/registrarProducto.jsp").forward(request, response);
             }
 
         } catch (Exception e) {

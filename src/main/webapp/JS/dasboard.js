@@ -48,25 +48,7 @@ sidebar.addEventListener("click", (e) => {
 
 
 
-document.querySelectorAll('.menu-link').forEach(link => {
-    link.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('data-target');
-        const submenu = document.getElementById(targetId);
 
-        if (submenu.style.display === "block") {
-            submenu.style.display = "none";
-            this.innerHTML = this.innerHTML.replace("▲", "▼");
-        } else {
-            // Cierra otros submenús abiertos
-            document.querySelectorAll('.submenu').forEach(sm => sm.style.display = "none");
-            document.querySelectorAll('.menu-link').forEach(l => l.innerHTML = l.innerHTML.replace("▲", "▼"));
-
-            submenu.style.display = "block";
-            this.innerHTML = this.innerHTML.replace("▼", "▲");
-        }
-    });
-});
 
 //exportar a excel
 function exportarExcel() {

@@ -4,7 +4,6 @@
  */
 package com.mycompany.vikids.dao.impl;
 
-import com.mycompany.vikids.util.conexionSQL;
 import com.mycompany.vikids.modelo.Producto;
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,8 +18,26 @@ public class ProductoDAOImpl implements ProductoDAO {
         this.conn = conn;
     }
 
+    private boolean validarProducto(Producto p) {
+        return p != null
+                && p.getCodigo() != null && !p.getCodigo().isBlank()
+                && p.getNombre() != null && !p.getNombre().isBlank()
+                && p.getDescripcion() != null && !p.getDescripcion().isBlank()
+                && p.getCategoria() != null && !p.getCategoria().isBlank()
+                && p.getMarca() != null && !p.getMarca().isBlank()
+                && p.getUnidad() != null && !p.getUnidad().isBlank()
+                && p.getImagen() != null && !p.getImagen().isBlank()
+                && p.getPrecio() >= 0
+                && p.getStock() >= 0;
+    }
+
     @Override
     public boolean insert(Producto producto) {
+        if (!validarProducto(producto)) {
+            System.out.println("Producto inválido");
+            return false;
+        }
+
         String sql = "INSERT INTO dbo.producto(codigo, nombre, descripcion, stock, precio, categoria, marca, unidad, imagen, activo) VALUES(?,?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, producto.getCodigo());
@@ -42,6 +59,11 @@ public class ProductoDAOImpl implements ProductoDAO {
 
     @Override
     public boolean update(Producto producto) {
+        if (!validarProducto(producto)) {
+            System.out.println("Producto inválido");
+            return false;
+        }
+
         String sql = "UPDATE producto SET nombre = ?, descripcion = ?, stock = ?, precio = ?, categoria = ?, marca = ?, unidad = ?, imagen = ? WHERE codigo = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, producto.getNombre());

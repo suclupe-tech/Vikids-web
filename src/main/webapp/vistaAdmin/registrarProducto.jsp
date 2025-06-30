@@ -35,6 +35,26 @@
                 </h3>
 
                 <form id="registroProducto" method="post" enctype="multipart/form-data" action="${pageContext.request.contextPath}/RegistrarProducto" class="space-y-6">
+
+                    <%
+                        String mensaje = (String) request.getAttribute("mensaje");
+                        String error = (String) request.getAttribute("error");
+                    %>
+
+                    <% if (mensaje != null) {%>
+                    <script>
+                        window.addEventListener('DOMContentLoaded', () => {
+                            mostrarToast("<%= mensaje%>", "green");
+                        });
+                    </script>
+                    <% } else if (error != null) {%>
+                    <script>
+                        window.addEventListener('DOMContentLoaded', () => {
+                            mostrarToast("<%= error%>", "red");
+                        });
+                    </script>
+                    <% }%>
+
                     <div class="grid md:grid-cols-3 gap-4">
                         <div>
                             <label for="codigo" class="block text-sm font-medium text-gray-700">Código</label>
@@ -71,7 +91,7 @@
                                 <option value="Accesorios">Accesorios</option>
                                 <option value="otra">Otra...</option>
                             </select>
-                            <input type="text" id="categoria" name="categoria" placeholder="Escribe nueva categoría" class="mt-2 hidden border border-gray-300 rounded-md p-2 w-full">
+                            <input type="text" id="nuevaCategoria" name="nuevacategoria" placeholder="Escribe nueva categoría" class="mt-2 hidden border border-gray-300 rounded-md p-2 w-full">
                         </div>
 
                         <div>
@@ -83,7 +103,7 @@
                                 <option value="PequeStyle">PequeStyle</option>
                                 <option value="otra">Otra...</option>
                             </select>
-                            <input type="text" id="nuevaMarca" name="marca" placeholder="Escribe nueva marca" class="mt-2 hidden border border-gray-300 rounded-md p-2 w-full">
+                            <input type="text" id="nuevaMarca" name="nuevamarca" placeholder="Escribe nueva marca" class="mt-2 hidden border border-gray-300 rounded-md p-2 w-full">
                         </div>
                     </div>
 
@@ -135,6 +155,7 @@
 
         <script src="../JS/dasboard.js"></script>
         <script src="../JS/registroProducto.js"></script>
+        <script src="../JS/toast.js"></script>
     </body>
     <div id="toast" class="fixed top-4 right-4 hidden p-4 rounded-xl shadow-lg text-white z-50"></div>
 

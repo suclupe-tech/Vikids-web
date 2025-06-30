@@ -9,14 +9,23 @@ import com.mycompany.vikids.modelo.Producto;
 
 public interface ProductoDAO {
     
+    //CRUD básico
    boolean insert(Producto producto);
    boolean update(Producto producto);
    boolean delete(String codigo);
+   
+   //Busquedas
    Producto buscarPorCodigo(String codigo);
    List<Producto> buscarPorNombre(String nombre);
+   
+   //Listado
    List<Producto> listarTodos();
+   
+   //Paginacion
    List<Producto> listarPaginado(int offset, int limit);
    int contarProductos();
+   
+   //Desactivación 
    boolean desactivar(String codigo);
    boolean reactivar(String codigo);
    List<Producto> listarInactivos();

@@ -21,7 +21,7 @@
 %>
 
 <%
-    ProductoDAOImpl dao = new ProductoDAOImpl( conexionSQL.conectar());
+    ProductoDAOImpl dao = new ProductoDAOImpl(conexionSQL.conectar());
     List<Producto> lista = dao.listarTodos();
 %>
 
@@ -67,9 +67,9 @@
                     <thead class="bg-gray-800 text-white">
                         <tr>
                             <th class="px-4 py-3"><input type="checkbox" id="checkAll" onclick="toggleAll(this)"></th>
-                            <th class="px-4 py-3">ID</th>
                             <th class="px-4 py-3">Código</th>
                             <th class="px-4 py-3">Nombre</th>
+                            <th class="px-4 py-3">Descripción</th>
                             <th class="px-4 py-3">Stock</th>
                             <th class="px-4 py-3">Precio</th>
                             <th class="px-4 py-3">Categoría</th>
@@ -83,21 +83,21 @@
                         <% for (Producto p : lista) {%>
                         <tr class="hover:bg-gray-100">
                             <td class="px-4 py-3"><input type="checkbox" class="product-check" value="1"></td>
-                            <td class="px-4 py-3"><%=p.getId()%></td>
                             <td class="px-4 py-3"><%=p.getCodigo()%></td>
                             <td class="px-4 py-3"><%=p.getNombre()%></td>
+                            <td class="px-4 py-3"><%=p.getDescripcion()%></td>
                             <td class="px-4 py-3"><%=p.getStock()%></td>
-                            <td class="px-4 py-3"><%=p.getPrecio()%></td>
+                            <td class="px-4 py-3">S/.<%=p.getPrecio()%></td>
                             <td class="px-4 py-3"><%=p.getCategoria()%></td>
                             <td class="px-4 py-3"><%=p.getMarca()%></td>
                             <td class="px-4 py-3"><%=p.getUnidad()%></td>
                             <td class="px-4 py-3">
-                                <img src="../imagen/<%=p.getImagen()%>" class="w-20 h-20 object-contain mx-auto rounded shadow" alt="Imagen del producto"/>
+                                <img src="../imagen/<%=p.getImagen()%>" class="w-10 h-10 object-contain mx-auto rounded shadow" alt="Imagen del producto"/>
                             </td>
                             <td class="px-4 py-3">
                                 <div class="flex justify-center gap-2">
-                                    <a href="verProducto.jsp?id=1" class="text-lg hover:text-blue-600">👁️</a>
-                                    <a href="editarProducto.jsp?id=1" class="text-lg hover:text-yellow-600">✏️</a>
+                                    <a href="verProducto.jsp?id=1" class="text-lg hover:text-blue-600"><i class="bi bi-eye mr-2"></i>️</a>
+                                    <a href="editarProducto.jsp?id=1" class="text-lg hover:text-yellow-600"><i class="bi bi-pencil-square mr-2"></i>️</a>
                                     <a href="DesactivarProducto?codigo=<%=p.getCodigo()%>" onclick="return confirm('¿Estás seguro de desactivar este producto?')" class="text-lg hover:text-red-600">🚫</a>
                                 </div>
                             </td>
@@ -122,5 +122,6 @@
 
         <script src="../JS/dasboard.js"></script>
         <script src="../JS/menuUsuario.js"></script>
+        <script src="../JS/sidebar.js"></script>
     </body>
 </html>

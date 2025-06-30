@@ -11,6 +11,7 @@ import java.sql.*;
 import java.util.List;
 import com.mycompany.vikids.dao.UsuarioAdminDAO;
 import com.mycompany.vikids.modelo.UsuarioAdmin;
+import java.util.ArrayList;
 
 public class UsuarioAdminDAOImpl implements UsuarioAdminDAO {
 
@@ -20,14 +21,29 @@ public class UsuarioAdminDAOImpl implements UsuarioAdminDAO {
         this.conn = conn;
     }
 
+    private boolean validarUsuarioAdmin(UsuarioAdmin u) {
+        return u != null
+                && u.getNombre() != null && !u.getNombre().isBlank()
+                && u.getApellido() != null && !u.getApellido().isBlank()
+                && u.getUsuario() != null && !u.getUsuario().isBlank()
+                && (u.getContraseña() != null && !u.getContraseña().isBlank() || u.getId() > 0) // Permitir contraseña vacía solo en update
+                && u.getTelefono() != null && !u.getTelefono().isBlank();
+    }
+
     @Override
     public boolean insert(UsuarioAdmin usuario) {
+
+        if (!validarUsuarioAdmin(usuario)) {
+            System.out.println("Usuario inválido");
+            return false;
+        }
         String sql = "INSERT INTO administrador (nombre, usuario, contraseña, telefono) VALUES (?, ?, ?, ?)";
         try (Connection con = conn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, usuario.getNombre());
             ps.setString(2, usuario.getUsuario());
-            ps.setString(3, usuario.getContraseña());
+            ps.setString(3, HashUtil.hashPassword(usuario.getContraseña()));
             ps.setString(4, usuario.getTelefono());
+            ps.setBoolean(5, usuario.isActivo());
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -37,27 +53,98 @@ public class UsuarioAdminDAOImpl implements UsuarioAdminDAO {
 
     @Override
     public boolean update(UsuarioAdmin usuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (!validarUsuarioAdmin(usuario)) {
+            System.out.println("Usuario inválido");
+            return false;
+        }
+
+        String sql = "UPDATE administrador SET nombre = ?, apellido = ?, usuario = ?, telefono = ?, estado = ? WHERE id = ?";
+        try (Connection con = conn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, usuario.getNombre());
+            ps.setString(2, usuario.getApellido());
+            ps.setString(3, usuario.getUsuario());
+            ps.setString(4, usuario.getTelefono());
+            ps.setBoolean(5, usuario.isActivo()); // ← esta línea es necesaria
+            ps.setInt(6, usuario.getId());
+
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public boolean delete(int idUsuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        if (idUsuario <= 0) {
+            return false;
+        }
+
+        String sql = "DELETE FROM administrador WHERE id = ?";
+        try (Connection con = conn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idUsuario);
+            return ps.executeUpdate() > 0;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public UsuarioAdmin buscarPorId(int idUsuario) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "SELECT * FROM administrador WHERE id = ?";
+        try (Connection con = conn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setInt(1, idUsuario);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return mapUsuario(rs);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
     public List<UsuarioAdmin> buscarPorNombre(String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<UsuarioAdmin> lista = new ArrayList<>();
+        String sql = "SELECT * FROM administrador WHERE nombre LIKE ?";
+        try (Connection con = conn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + nombre + "%");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                lista.add(mapUsuario(rs));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
     }
 
     @Override
     public List<UsuarioAdmin> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<UsuarioAdmin> lista = new ArrayList<>();
+        String sql = "SELECT * FROM administrador";
+        try (Connection con = conn.getConnection(); PreparedStatement ps = con.prepareStatement(sql); ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                lista.add(mapUsuario(rs));
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lista;
     }
 
     @Override
@@ -93,6 +180,18 @@ public class UsuarioAdminDAOImpl implements UsuarioAdminDAO {
         }
 
         return false;
+    }
+
+    private UsuarioAdmin mapUsuario(ResultSet rs) throws SQLException {
+        UsuarioAdmin u = new UsuarioAdmin();
+        u.setId(rs.getInt("id"));
+        u.setNombre(rs.getString("nombre"));
+        u.setApellido(rs.getString("apellido"));
+        u.setUsuario(rs.getString("usuario"));
+        u.setTelefono(rs.getString("telefono"));
+        u.setActivo(rs.getBoolean("activo"));
+
+        return u;
     }
 
 }

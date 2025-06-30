@@ -37,16 +37,19 @@
 </div>
 
 <!-- Sidebar -->
-<aside id="sidebar" class="fixed top-14 left-0 w-64 bg-gray-800 text-white h-full p-4 space-y-2 z-40">
-    <div id="overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-30"></div>
+<aside id="sidebar" class="fixed top-14 left-0 w-64 bg-gray-800 text-white h-full p-4 space-y-2 z-40 transform translate-x-0 transition-transform duration-300">
+    
     <!-- ejemplo de submenú -->
-    <a href="#" class="block px-4 py-2 font-semibold hover:bg-gray-700 transition-all" data-target="submenuInicio">
+    
+    <!-- Inicio -->
+    <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuInicio">
         <i class="bi bi-house-door mr-2"></i>Inicio</a>
-    <div id="submenuInicio" class="pl-4 max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
-        <a href="admin.jsp" class="block py-1 hover:text-blue-600 text-blue-400">Panel principal</a>
-        <a href="perfil.jsp" class="block py-1 hover:text-blue-600 text-blue-400">Perfil</a>
+    <div id="submenuInicio" class="submenu ml-4 space-y-2 hidden transition-all duration-300">
+        <a href="admin.jsp" class="block hover:bg-gray-700 text-blue-400"><i class="bi bi-grid mr-2"></i>Panel principal</a>
+        <a href="perfil.jsp" class="block hover:bg-gray-700 text-blue-400"><i class="bi bi-person-fill mr-2"></i>Perfil</a>
     </div>
-
+    
+<!-- Producto -->
     <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuProducto">
         <i class="bi bi-box-seam mr-2"></i>Producto</a>
     <div id="submenuProducto" class="submenu ml-4 space-y-2 hidden transition-all duration-300">
@@ -60,9 +63,10 @@
         </a>
 
         <a href="categorias.jsp" class="block hover:bg-gray-700 text-blue-400">
-            <i class="bi bi-folder2-open"></i>Categorías</a>
+            <i class="bi bi-folder2-open mr-2"></i>Categorías</a>
     </div>
-
+           
+<!-- Inventario -->
     <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuInventario">
         <i class="bi bi-boxes mr-2"></i>Inventario</a>
     <div id="submenuInventario" class="submenu ml-4 space-y-2 hidden transition-all duration-300">
@@ -72,6 +76,7 @@
             <i class="bi bi-boxes mr-2"></i>Agregar Stock</a>
     </div>
 
+<!-- Ventas -->
     <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuVentas">
         <i class="bi bi-cart-check mr-2"></i>Ventas</a>
     <div id="submenuVentas" class="submenu ml-4 space-y-2 hidden transition-all duration-300">
@@ -81,6 +86,7 @@
             <i class="bi bi-clock-history mr-2"></i>Historial de Ventas</a>
     </div>
 
+<!-- Mantenimiento -->
     <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuMantenimiento">
         <i class="bi bi-tools mr-2"></i>Mantenimiento</a>
     <div id="submenuMantenimiento" class="submenu ml-4 space-y-2 hidden transition-all duration-300">
@@ -92,6 +98,7 @@
             <i class="bi bi-gear mr-2"></i>Configuración</a>
     </div>
 
+<!-- Cerrar Sesion -->
     <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuSalir">
         <i class="bi bi-box-arrow-right mr-2"></i>Salir</a>
     <div id="submenuSalir" class="submenu ml-4 space-y-2 hidden transition-all duration-300">

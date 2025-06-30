@@ -11,18 +11,20 @@ public class UsuarioAdmin {
     private String usuario;
     private String contraseña;
     private String telefono;
+    private boolean activo;
 
     public UsuarioAdmin() {
     }
     
 
-    public UsuarioAdmin(int id, String nombre, String apellido, String usuario, String password, String telefono) {
+    public UsuarioAdmin(int id, String nombre, String apellido, String usuario, String password, String telefono, boolean activo) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.usuario = usuario;
         this.contraseña = password;
         this.telefono = telefono;
+        this.activo = activo;
     }
 
     public int getId() {
@@ -71,6 +73,14 @@ public class UsuarioAdmin {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public boolean isActivo() {
+        return activo;
+    }
+
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
     
     
