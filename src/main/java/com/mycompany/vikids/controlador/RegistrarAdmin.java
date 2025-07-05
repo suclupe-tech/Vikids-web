@@ -48,18 +48,19 @@ public class RegistrarAdmin extends HttpServlet {
             admin.setUsuario(usuario);
             admin.setContraseña(passwordHash);
             admin.setTelefono(telefono);
+            admin.setActivo(1);
 
             // Guardar en BD
             if (dao.insert(admin)) {
                 response.sendRedirect("admin.jsp?registro=1");
             } else {
                 request.setAttribute("error", "No se pudo registrar al administrador");
-                request.getRequestDispatcher("registro-admin.jsp").forward(request, response);
+                request.getRequestDispatcher("vistaAdmin/registroAdmin.jsp").forward(request, response);
             }
 
         } catch (IllegalArgumentException e) {
             request.setAttribute("error", "Error: " + e.getMessage());
-            request.getRequestDispatcher("registro-admin.jsp").forward(request, response);
+            request.getRequestDispatcher("vistaAdmin/registroAdmin.jsp").forward(request, response);
         }
     
     }

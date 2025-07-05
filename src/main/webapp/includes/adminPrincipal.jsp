@@ -45,8 +45,8 @@
     <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuInicio">
         <i class="bi bi-house-door mr-2"></i>Inicio</a>
     <div id="submenuInicio" class="submenu ml-4 space-y-2 hidden transition-all duration-300">
-        <a href="admin.jsp" class="block hover:bg-gray-700 text-blue-400"><i class="bi bi-grid mr-2"></i>Panel principal</a>
-        <a href="perfil.jsp" class="block hover:bg-gray-700 text-blue-400"><i class="bi bi-person-fill mr-2"></i>Perfil</a>
+        <a href="dashboard.jsp" class="block hover:bg-gray-700 text-blue-400"><i class="bi bi-grid mr-2"></i>Panel principal</a>
+        <a href="#" class="block hover:bg-gray-700 text-blue-400"><i class="bi bi-person-fill mr-2"></i>Perfil</a>
     </div>
     
 <!-- Producto -->
@@ -57,7 +57,7 @@
             <i class="bi bi-plus-circle mr-2"></i>Nuevo Producto</a>
         <a href="../vistaAdmin/dashboard.jsp" class="block hover:bg-gray-700 text-blue-400">
             <i class="bi bi-box-seam mr-2"></i>Listar Productos</a>
-        <a href="${pageContext.request.contextPath}/ListarInactivos"
+        <a href="../vistaAdmin/productosInactivos.jsp"
            class="block hover:bg-gray-700 text-blue-400">
             <i class="bi bi-box-seam mr-2"></i> Productos Inactivos
         </a>
@@ -80,9 +80,9 @@
     <a href="#" class="block py-2 px-4 hover:bg-gray-700 rounded menu-link" data-target="submenuVentas">
         <i class="bi bi-cart-check mr-2"></i>Ventas</a>
     <div id="submenuVentas" class="submenu ml-4 space-y-2 hidden transition-all duration-300">
-        <a href="nuevaVenta.jsp" class="block hover:bg-gray-700 text-blue-400">
+        <a href="../vistaAdmin/nuevaVenta.jsp" class="block hover:bg-gray-700 text-blue-400">
             <i class="bi bi-plus-circle mr-2"></i>Nueva Venta</a>
-        <a href="historialVentas.jsp" class="block hover:bg-gray-700 text-blue-400">
+        <a href="../vistaAdmin/historialVentas.jsp" class="block hover:bg-gray-700 text-blue-400">
             <i class="bi bi-clock-history mr-2"></i>Historial de Ventas</a>
     </div>
 
@@ -92,7 +92,7 @@
     <div id="submenuMantenimiento" class="submenu ml-4 space-y-2 hidden transition-all duration-300">
         <a href="usuarios.jsp" class="block hover:bg-gray-700 text-blue-400">
             <i class="bi bi-person mr-2"></i>Usuarios</a>
-        <a href="clientes.jsp" class="block hover:bg-gray-700 text-blue-400">
+        <a href="ListarUsuariosAdmin" class="block hover:bg-gray-700 text-blue-400">
             <i class="bi bi-people mr-2"></i>Clientes</a>
         <a href="configuracion.jsp" class="block hover:bg-gray-700 text-blue-400">
             <i class="bi bi-gear mr-2"></i>Configuración</a>

@@ -12,7 +12,7 @@
     </head>
     <body class="bg-gradient-to-br from-purple-100 to-white min-h-screen flex items-center justify-center">
         <%@include file="../includes/adminPrincipal.jsp" %>
-        <div class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-lg border border-gray-200">
+        <div id="mainContent" class="bg-white shadow-xl rounded-2xl p-8 w-full max-w-lg border border-gray-200">
             <h2 class="text-3xl font-bold text-center text-purple-700 mb-6">Registrar Administrador</h2>
 
             <% String error = (String) request.getAttribute("error");
@@ -22,12 +22,19 @@
             </div>
             <% }%>
 
-            <form action="/SistemaVikids/RegistrarAdmin" method="post" class="space-y-5">
+            <form action="<%= request.getContextPath()%>/RegistrarAdmin" method="post" class="space-y-5">
 
                 <!-- Nombre -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Nombre <span class="text-red-500">*</span></label>
                     <input type="text" name="nombre" required
+                           class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-purple-400 focus:outline-none border-gray-300"/>
+                </div>
+
+                <!-- Apellido -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700">Apellido <span class="text-red-500">*</span></label>
+                    <input type="text" name="apellido" required
                            class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-purple-400 focus:outline-none border-gray-300"/>
                 </div>
 
@@ -53,14 +60,14 @@
                 </div>
 
                 <!-- Estado -->
-                <div>
+                <!--<div>
                     <label class="block text-sm font-medium text-gray-700">Estado</label>
                     <select name="estado"
                             class="mt-1 w-full px-4 py-2 border rounded-lg shadow-sm focus:ring-2 focus:ring-purple-400 focus:outline-none border-gray-300">
                         <option value="1" selected>Activo</option>
                         <option value="0">Inactivo</option>
                     </select>
-                </div>
+                </div>  -->
 
                 <!-- Botón -->
                 <div>
@@ -74,6 +81,7 @@
         <script src="../JS/toastUsuario.js"></script>
         <script src="../JS/dasboard.js"></script>
         <script src="../JS/menuUsuario.js"></script>
+        <script src="../JS/sidebar.js"></script>
 
     </body>
     <% String mensaje = (String) request.getAttribute("mensaje"); %>

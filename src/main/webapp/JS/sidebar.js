@@ -5,7 +5,8 @@
 
 
 
-    // Submenús desplegables
+// Submenús desplegables
+document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll(".menu-link").forEach(link => {
         link.addEventListener("click", function (e) {
             e.preventDefault();
@@ -13,15 +14,18 @@
             const targetId = this.getAttribute("data-target");
             const submenu = document.getElementById(targetId);
 
-            // Cerrar otros submenús
+            if (!submenu)
+                return;
+
             document.querySelectorAll(".submenu").forEach(sm => {
                 if (sm !== submenu) {
                     sm.classList.add("hidden");
                 }
             });
 
-            // Mostrar/ocultar el submenú actual
             submenu.classList.toggle("hidden");
         });
     });
+});
+
 

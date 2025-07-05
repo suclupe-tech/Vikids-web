@@ -14,43 +14,14 @@
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
-        <style>
-            body {
-                background-color: #f8f9fa;
-            }
-            .table-wrapper {
-                background: #fff;
-                border-radius: 15px;
-                padding: 20px;
-                box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            }
-            .filter-group {
-                gap: 10px;
-            }
-            @media print {
-                body * {
-                    visibility: hidden;
-                }
-                .table-wrapper, .table-wrapper * {
-                    visibility: visible;
-                }
-                .table-wrapper {
-                    position: absolute;
-                    left: 0;
-                    top: 0;
-                }
-                .no-print {
-                    display: none;
-                }
-            }
-        </style>
+        <link rel="stylesheet" href="../styleCss/historialventas.css"/>
+        
     </head>
     <body class="p-4">
-        <%@include file="../CODIGO-REUTILIZABLE/adminPrincipal.jsp" %>
-        <div class="container table-wrapper ml-64 mt-20 p-6">
+        <%@include file="../includes/adminPrincipal.jsp" %>
+        <div id="mainContent" class="container table-wrapper ml-64 mt-20 p-6">
             <div class="d-flex justify-content-between align-items-center mb-4">
-                <h4 class="mb-0">Ventas Registradas</h4>
+                <h2 class="mb-0">Ventas Registradas</h2>
                 <div class="d-flex gap-2 no-print">
                     <a href="nuevaVenta.jsp" class="btn btn-success"><i class="bi bi-plus-circle"></i> Nueva Venta</a>
                     <button class="btn btn-secondary" onclick="window.print()"><i class="bi bi-printer"></i> Imprimir</button>
@@ -127,45 +98,10 @@
             </table>
         </div>
 
-        <script>
-            function filtrarTabla() {
-                const fecha = document.getElementById("filtroFecha").value;
-                const cliente = document.getElementById("filtroCliente").value.toLowerCase();
-                const estado = document.getElementById("filtroEstado").value;
-
-                const filas = document.querySelectorAll("#tablaVentas tr");
-
-                filas.forEach(fila => {
-                    const fechaFila = fila.cells[1].textContent.trim();
-                    const clienteFila = fila.cells[2].textContent.trim().toLowerCase();
-                    const estadoFila = fila.cells[6].textContent.trim();
-
-                    const coincideFecha = !fecha || fecha === fechaFila;
-                    const coincideCliente = !cliente || clienteFila.includes(cliente);
-                    const coincideEstado = !estado || estadoFila === estado;
-
-                    fila.style.display = (coincideFecha && coincideCliente && coincideEstado) ? "" : "none";
-                });
-            }
-
-            function exportarExcel() {
-                const tabla = document.getElementById('tablaVentasExportar');
-                const wb = XLSX.utils.table_to_book(tabla, {sheet: "Ventas"});
-                XLSX.writeFile(wb, "ventas.xlsx");
-            }
-
-            function exportarPDF() {
-                const doc = new jspdf.jsPDF();
-                doc.text("Lista de Ventas", 14, 10);
-                doc.autoTable({
-                    html: '#tablaVentasExportar',
-                    startY: 20,
-                    headStyles: {fillColor: [40, 40, 40]},
-                });
-                doc.save("ventas.pdf");
-            }
-        </script>
+        <script src="../JS/historialventas.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
         <script src="../JS/dasboard.js"></script>
+        <script src="../JS/sidebar.js"></script>
+        <script src="../JS/menuUsuario.js"></script>
     </body>
 </html>

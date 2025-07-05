@@ -156,6 +156,7 @@
         <script src="../JS/dasboard.js"></script>
         <script src="../JS/registroProducto.js"></script>
         <script src="../JS/toast.js"></script>
+        <script src="../JS/sidebar.js"></script>
     </body>
     <div id="toast" class="fixed top-4 right-4 hidden p-4 rounded-xl shadow-lg text-white z-50"></div>
 

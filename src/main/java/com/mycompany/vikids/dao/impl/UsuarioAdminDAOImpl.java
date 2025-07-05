@@ -43,7 +43,7 @@ public class UsuarioAdminDAOImpl implements UsuarioAdminDAO {
             ps.setString(2, usuario.getUsuario());
             ps.setString(3, HashUtil.hashPassword(usuario.getContraseña()));
             ps.setString(4, usuario.getTelefono());
-            ps.setBoolean(5, usuario.isActivo());
+
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -65,7 +65,6 @@ public class UsuarioAdminDAOImpl implements UsuarioAdminDAO {
             ps.setString(2, usuario.getApellido());
             ps.setString(3, usuario.getUsuario());
             ps.setString(4, usuario.getTelefono());
-            ps.setBoolean(5, usuario.isActivo()); // ← esta línea es necesaria
             ps.setInt(6, usuario.getId());
 
             return ps.executeUpdate() > 0;
@@ -189,9 +188,26 @@ public class UsuarioAdminDAOImpl implements UsuarioAdminDAO {
         u.setApellido(rs.getString("apellido"));
         u.setUsuario(rs.getString("usuario"));
         u.setTelefono(rs.getString("telefono"));
-        u.setActivo(rs.getBoolean("activo"));
+        u.setActivo(rs.getInt("activo"));
 
         return u;
+    }
+
+    @Override
+    public boolean cambiarEstado(int idUsuario, int nuevoEstado) {
+        if (idUsuario <= 0) {
+            return false;
+        }
+
+        String sql = "UPDATE administrador SET activo = ? WHERE id = ?";
+        try (Connection con = conn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, nuevoEstado);
+            ps.setInt(2, idUsuario);
+            return ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 }
