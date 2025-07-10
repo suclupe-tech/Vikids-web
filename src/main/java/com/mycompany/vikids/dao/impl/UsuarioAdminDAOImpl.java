@@ -30,6 +30,20 @@ public class UsuarioAdminDAOImpl implements UsuarioAdminDAO {
                 && u.getTelefono() != null && !u.getTelefono().isBlank();
     }
 
+    public boolean existeUsuario(String usuario) {
+        String sql = "SELECT COUNT(*) FROM administrador WHERE usuario = ?";
+        try (Connection con = conn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, usuario);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
     @Override
     public boolean insert(UsuarioAdmin usuario) {
 
@@ -37,16 +51,31 @@ public class UsuarioAdminDAOImpl implements UsuarioAdminDAO {
             System.out.println("Usuario inválido");
             return false;
         }
-        String sql = "INSERT INTO administrador (nombre, usuario, contraseña, telefono) VALUES (?, ?, ?, ?)";
+
+        if (existeUsuario(usuario.getUsuario())) {
+            System.out.println("⚠ El nombre de usuario ya está registrado.");
+            return false;
+        }
+        
+        String sql = "INSERT INTO administrador (nombre, apellido, usuario, contraseña, telefono) VALUES (?, ?, ?, ?, ?)";
         try (Connection con = conn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, usuario.getNombre());
-            ps.setString(2, usuario.getUsuario());
-            ps.setString(3, HashUtil.hashPassword(usuario.getContraseña()));
-            ps.setString(4, usuario.getTelefono());
+            ps.setString(2, usuario.getApellido());
+            ps.setString(3, usuario.getUsuario());
+            ps.setString(4, usuario.getContraseña());
+            ps.setString(5, usuario.getTelefono());
+
+            System.out.println("🟢 Ejecutando INSERT con:");
+            System.out.println("Nombre: " + usuario.getNombre());
+            System.out.println("Apellido: " + usuario.getApellido());
+            System.out.println("Usuario: " + usuario.getUsuario());
+            System.out.println("Contraseña: " + usuario.getContraseña());
+            System.out.println("Teléfono: " + usuario.getTelefono());
 
             return ps.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Error al insertar usuario: " + e.getMessage());
             return false;
         }
     }
@@ -58,7 +87,7 @@ public class UsuarioAdminDAOImpl implements UsuarioAdminDAO {
             return false;
         }
 
-        String sql = "UPDATE administrador SET nombre = ?, apellido = ?, usuario = ?, telefono = ?, estado = ? WHERE id = ?";
+        String sql = "UPDATE administrador SET nombre = ?, apellido = ?, usuario = ?, telefono = ?,  WHERE id = ?";
         try (Connection con = conn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, usuario.getNombre());
@@ -188,26 +217,8 @@ public class UsuarioAdminDAOImpl implements UsuarioAdminDAO {
         u.setApellido(rs.getString("apellido"));
         u.setUsuario(rs.getString("usuario"));
         u.setTelefono(rs.getString("telefono"));
-        u.setActivo(rs.getInt("activo"));
 
         return u;
-    }
-
-    @Override
-    public boolean cambiarEstado(int idUsuario, int nuevoEstado) {
-        if (idUsuario <= 0) {
-            return false;
-        }
-
-        String sql = "UPDATE administrador SET activo = ? WHERE id = ?";
-        try (Connection con = conn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setInt(1, nuevoEstado);
-            ps.setInt(2, idUsuario);
-            return ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
     }
 
 }

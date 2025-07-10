@@ -15,6 +15,7 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.sql.*;
 import com.mycompany.vikids.util.conexionSQL;
+
 /**
  *
  * @author USER
@@ -23,18 +24,28 @@ import com.mycompany.vikids.util.conexionSQL;
 public class RegistrarAdmin extends HttpServlet {
 
     UsuarioAdminDAOImpl dao = new UsuarioAdminDAOImpl(new conexionSQL());
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
         String usuario = request.getParameter("usuario");
         String password = request.getParameter("password");
         String telefono = request.getParameter("telefono");
 
+        // 👀 Imprime lo que llega desde el formulario
+        System.out.println("🟡 Datos recibidos del formulario:");
+        System.out.println("Nombre: " + nombre);
+        System.out.println("Apellido: " + apellido);
+        System.out.println("Usuario: " + usuario);
+        System.out.println("Contraseña: " + password);
+        System.out.println("Teléfono: " + telefono);
+
         try {
             // Validaciones
             Preconditions.checkNotNull(nombre, "Nombre requerido");
+            Preconditions.checkNotNull(apellido, "Apellido requerido");
             Preconditions.checkNotNull(usuario, "Usuario requerido");
             Preconditions.checkNotNull(password, "Contraseña requerida");
             Preconditions.checkNotNull(telefono, "Teléfono requerido");
@@ -45,24 +56,25 @@ public class RegistrarAdmin extends HttpServlet {
             // Crear objeto
             UsuarioAdmin admin = new UsuarioAdmin();
             admin.setNombre(nombre);
+            admin.setApellido(apellido);
             admin.setUsuario(usuario);
             admin.setContraseña(passwordHash);
             admin.setTelefono(telefono);
-            admin.setActivo(1);
 
             // Guardar en BD
-            if (dao.insert(admin)) {
-                response.sendRedirect("admin.jsp?registro=1");
+            if (dao.existeUsuario(usuario)) {
+                request.setAttribute("error", "❌ El nombre de usuario ya está registrado. Elige otro.");
+            } else if (dao.insert(admin)) {
+                request.setAttribute("exito", "✅ Registro exitoso del administrador");
             } else {
-                request.setAttribute("error", "No se pudo registrar al administrador");
-                request.getRequestDispatcher("vistaAdmin/registroAdmin.jsp").forward(request, response);
+                request.setAttribute("error", "❌ No se pudo registrar al administrador");
             }
 
         } catch (IllegalArgumentException e) {
             request.setAttribute("error", "Error: " + e.getMessage());
             request.getRequestDispatcher("vistaAdmin/registroAdmin.jsp").forward(request, response);
         }
-    
+
     }
 
     /**

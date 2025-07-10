@@ -15,6 +15,6 @@ public interface UsuarioAdminDAO {
    List<UsuarioAdmin> buscarPorNombre(String nombre);
    List<UsuarioAdmin> listarTodos();
    boolean autenticar (String usuario, String contraseña);
-   boolean cambiarEstado(int idUsuario, int nuevoEstado);
+   
 
 }

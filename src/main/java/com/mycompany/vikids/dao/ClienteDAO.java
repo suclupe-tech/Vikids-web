@@ -9,8 +9,7 @@ import com.mycompany.vikids.modelo.Cliente;
 public interface ClienteDAO {
    boolean insert(Cliente cliente);
    boolean update(Cliente cliente);
-   boolean delete(String dni);
-   Cliente buscarPorCodigo(String dni);
-   List<Cliente> buscarPorNombre(String nombre);
+   boolean delete(int id);
+   Cliente buscarPorDni(String dni);
    List<Cliente> listarTodos();
 }

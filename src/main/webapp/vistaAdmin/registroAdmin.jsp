@@ -22,6 +22,16 @@
             </div>
             <% }%>
 
+            <% if (request.getAttribute("exito") != null) {%>
+            <div class="bg-green-100 text-green-700 p-2 rounded mb-2">
+                <%= request.getAttribute("exito")%>
+            </div>
+            <% } else if (request.getAttribute("error") != null) {%>
+            <div class="bg-red-100 text-red-700 p-2 rounded mb-2">
+                <%= request.getAttribute("error")%>
+            </div>
+            <% }%>
+
             <form action="<%= request.getContextPath()%>/RegistrarAdmin" method="post" class="space-y-5">
 
                 <!-- Nombre -->
@@ -78,10 +88,10 @@
                 </div>
             </form>
         </div>
-        <script src="../JS/toastUsuario.js"></script>
-        <script src="../JS/dasboard.js"></script>
-        <script src="../JS/menuUsuario.js"></script>
-        <script src="../JS/sidebar.js"></script>
+        <script src="<%= context %>/JS/toastUsuario.js"></script>
+        <script src="<%= context %>/JS/dasboard.js"></script>
+        <script src="<%= context %>/JS/menuUsuario.js"></script>
+        <script src="<%= context %>/JS/sidebar.js"></script>
 
     </body>
     <% String mensaje = (String) request.getAttribute("mensaje"); %>

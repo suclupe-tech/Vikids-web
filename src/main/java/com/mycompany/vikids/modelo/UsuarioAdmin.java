@@ -11,20 +11,20 @@ public class UsuarioAdmin {
     private String usuario;
     private String contraseña;
     private String telefono;
-    private int activo;
+    
 
     public UsuarioAdmin() {
     }
     
 
-    public UsuarioAdmin(int id, String nombre, String apellido, String usuario, String password, String telefono, int activo) {
+    public UsuarioAdmin(int id, String nombre, String apellido, String usuario, String password, String telefono) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.usuario = usuario;
         this.contraseña = password;
         this.telefono = telefono;
-        this.activo = activo;
+        
     }
 
     public int getId() {
@@ -73,15 +73,6 @@ public class UsuarioAdmin {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
-    }
-
-    public int getActivo() {
-        return activo;
-    }
-
-    public void setActivo(int activo) {
-        this.activo = activo;
-    }
-    
+    }  
     
 }

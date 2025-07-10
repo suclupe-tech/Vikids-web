@@ -28,6 +28,11 @@ public class ListarUsuariosAdmin extends HttpServlet {
             throws ServletException, IOException {
         try {
             List<UsuarioAdmin> lista = dao.listarTodos();
+            System.out.println("🟢 Usuarios encontrados: " + lista.size());
+
+            for (UsuarioAdmin u : lista) {
+                System.out.println("👤 Usuario: " + u.getId() + " - " + u.getNombre());
+            }
 
             request.setAttribute("listUsuario", lista);
             request.getRequestDispatcher("vistaAdmin/usuarios.jsp").forward(request, response);

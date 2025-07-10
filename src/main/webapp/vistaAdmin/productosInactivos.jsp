@@ -69,9 +69,9 @@
         </div>
 
         <!-- ✅ SCRIPT para ocultar el toast -->
-        <script src="../JS/toast.js"></script>
-        <script src="../JS/dasboard.js"></script>
-        <script src="../JS/sidebar.js"></script>
+        <script src="<%= context %>/JS/toast.js"></script>
+        <script src="<%= context %>/JS/dasboard.js"></script>
+        <script src="<%= context %>/JS/sidebar.js"></script>
 
     </body>
     <!-- ✅ TOAST SI REACTIVADO -->

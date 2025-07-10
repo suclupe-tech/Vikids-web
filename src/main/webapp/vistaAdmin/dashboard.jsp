@@ -40,7 +40,7 @@
 
         <%@include file="../includes/adminPrincipal.jsp" %>
         <!-- Contenido principal -->
-        <div id="mainContent" class="ml-64 mt-20 p-6">
+        <div id="mainContent" class="max-w-7xl mx-auto bg-white p-6 rounded-xl shadow-lg ml-64 mt-20 p-6">
             <h5 class="text-2xl font-semibold mb-4">Lista de Productos</h5>
             <h3 class="text-xl font-semibold mb-2">Bienvenido, <%= usuario%> 👋</h3>
 
@@ -63,7 +63,7 @@
 
             <!-- Tabla -->
             <div class="w-full overflow-x-auto px-4 max-w-screen-2xl mx-auto">
-                <table class="w-full table-auto border text-center text-base">
+                <table  id="tablaProductos" class="w-full table-auto border text-center text-base">
                     <thead class="bg-gray-800 text-white">
                         <tr>
                             <th class="px-4 py-3"><input type="checkbox" id="checkAll" onclick="toggleAll(this)"></th>
@@ -120,8 +120,12 @@
             </div>
         </div>
 
-        <script src="../JS/dasboard.js"></script>
-        <script src="../JS/menuUsuario.js"></script>
-        <script src="../JS/sidebar.js"></script>
+        <script src="<%= context%>/JS/dasboard.js"></script>
+        <script src="<%= context%>/JS/menuUsuario.js"></script>
+        <script src="<%= context%>/JS/sidebar.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/datatable-init.js"></script>
     </body>
 </html>

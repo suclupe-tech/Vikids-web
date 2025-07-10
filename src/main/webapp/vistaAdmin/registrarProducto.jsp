@@ -20,7 +20,7 @@
             <div class="bg-white shadow-lg rounded-lg p-8 max-w-4xl mx-auto">
 
                 <div class="flex justify-end">
-                    <a href="admin/dashboard.jsp" class="text-red-500 hover:text-white border border-red-500 hover:bg-red-500 rounded-full p-2" title="Cerrar y volver">
+                    <a href="dashboard.jsp" class="text-red-500 hover:text-white border border-red-500 hover:bg-red-500 rounded-full p-2" title="Cerrar y volver">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 16 16">
                         <path d="M4.646 4.646a.5.5 0 011 0L8 6.293l2.354-2.647a.5.5 0 01.708.708L8.707 7l2.647 2.354a.5.5 0 01-.708.708L8 7.707l-2.354 2.647a.5.5 0 01-.708-.708L7.293 7 4.646 4.646a.5.5 0 010-.708z"/>
                         </svg>
@@ -153,10 +153,10 @@
             </div>
         </div>
 
-        <script src="../JS/dasboard.js"></script>
-        <script src="../JS/registroProducto.js"></script>
-        <script src="../JS/toast.js"></script>
-        <script src="../JS/sidebar.js"></script>
+        <script src="<%= context %>/JS/dasboard.js"></script>
+        <script src="<%= context %>/JS/registroProducto.js"></script>
+        <script src="<%= context %>/JS/toast.js"></script>
+        <script src="<%= context %>/JS/sidebar.js"></script>
     </body>
     <div id="toast" class="fixed top-4 right-4 hidden p-4 rounded-xl shadow-lg text-white z-50"></div>
 

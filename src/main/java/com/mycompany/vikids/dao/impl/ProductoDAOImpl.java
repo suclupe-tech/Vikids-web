@@ -18,6 +18,10 @@ public class ProductoDAOImpl implements ProductoDAO {
         this.conn = conn;
     }
 
+    public ProductoDAOImpl() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     private boolean validarProducto(Producto p) {
         return p != null
                 && p.getCodigo() != null && !p.getCodigo().isBlank()
@@ -98,18 +102,29 @@ public class ProductoDAOImpl implements ProductoDAO {
 
     @Override
     public Producto buscarPorCodigo(String codigo) {
+        Producto producto = null;
         String sql = "SELECT * FROM producto WHERE codigo = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, codigo);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                return crearProductoDesdeRS(rs);
+                producto = new Producto();
+                producto.setId(rs.getInt("id"));
+                producto.setCodigo(rs.getString("codigo"));
+                producto.setNombre(rs.getString("nombre"));
+                producto.setDescripcion(rs.getString("descripcion"));
+                producto.setStock(rs.getInt("stock"));
+                producto.setPrecio(rs.getDouble("precio"));
+                producto.setCategoria(rs.getString("categoria"));
+                producto.setMarca(rs.getString("marca"));
+                producto.setUnidad(rs.getString("unidad"));
+                producto.setImagen(rs.getString("imagen"));
             }
         } catch (SQLException e) {
             System.out.println("Error al buscar producto por código:");
             e.printStackTrace();
         }
-        return null;
+        return producto;
     }
 
     @Override

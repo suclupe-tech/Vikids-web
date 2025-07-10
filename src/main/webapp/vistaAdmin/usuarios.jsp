@@ -21,7 +21,7 @@
     </head>
     <body class="bg-gray-100 p-8">
         <%@include file="../includes/adminPrincipal.jsp" %>
-        <div id="mainContent" class="ml-64 mt-20 p-6">
+        <div id="mainContent" class="max-w-7xl mx-auto bg-white p-6 rounded-xl shadow-lg ml-64 mt-20 p-6">
             <h1 class="text-2xl font-bold mb-4">Usuarios Administradores</h1>
 
             <!-- Campo de búsqueda -->
@@ -35,7 +35,7 @@
                 </a>
             </div>
 
-            <table class="min-w-full table-auto text-left border">
+            <table id="tablaUsuarios" class="min-w-full table-auto text-left border">
                 <thead>
                     <tr class="bg-gray-200 text-gray-700">
                         <th class="p-2">ID</th>
@@ -46,10 +46,10 @@
                         <th class="p-2">Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="tablaUsuarios">
+                <tbody >
                     <%
                         List<UsuarioAdmin> listUsuario = (List< UsuarioAdmin>) request.getAttribute("listUsuario");
-                        if (listUsuario != null) {
+                        if (listUsuario != null && !listUsuario.isEmpty()) {
                             for (UsuarioAdmin u : listUsuario) {
                     %>
                     <tr class="border-t hover:bg-gray-50">
@@ -58,36 +58,42 @@
                         <td class="p-2"><%= u.getApellido()%></td>
                         <td class="p-2"><%= u.getUsuario()%></td>
                         <td class="p-2"><%= u.getTelefono()%></td>
-                        <td class="p-2"><%= u.getActivo() == 1 ? "Activo" : "Inactivo"%>
+                        <td class="p-2 space-x-2">
+                            <a href="EditarUsuarioAdmin?id=<%= u.getId()%>" 
+                               class="text-blue-500 hover:text-blue-700" 
+                               title="Editar">
+                                <i class="bi bi-pencil-square"></i>
+                            </a>
+                            <a href="EliminarUsuarioAdmin?id=<%= u.getId()%>" 
+                               class="text-red-500 hover:text-red-700" 
+                               onclick="return confirm('¿Eliminar este usuario?')" 
+                               title="Eliminar">
+                                <i class="bi bi-trash"></i>
+                            </a>
                         </td>
-                        <td class="p-2">
-                            <a href="EditarUsuarioAdmin?id=<%= u.getId()%>" class="text-blue-500 hover:underline">Editar</a> |
-                            <a href="EliminarUsuarioAdmin?id=<%= u.getId()%>" class="text-red-500 hover:underline" onclick="return confirm('¿Eliminar este usuario?')">Eliminar</a>
-                            
-                            
-                            <% if (u.getActivo() == 1) {%>
-                            <a href="DesactivarUsuario?id=<%= u.getId()%>" class="text-yellow-500 hover:underline"
-                               onclick="return confirm('¿Deseas desactivar este usuario?')">Desactivar</a>
-                            <% } else {%>
-                            <a href="ActivarUsuario?id=<%= u.getId()%>" class="text-green-500 hover:underline"
-                               onclick="return confirm('¿Deseas activar este usuario?')">Activar</a>
-                            <% } %>
-                        </td>
+
                     </tr>
                     <%
                         }
                     } else {
                     %>
-                    <tr><td colspan="6" class="text-center text-red-600">⚠️ No se pudo cargar la lista de usuarios.</td></tr>
+                    <tr><td colspan="6" class="text-center text-yellow-600">⚠️ No hay usuarios registrados aún.</td></tr>
                     <%
                         }
                     %>
                 </tbody>
             </table>
         </div>
-        <script src="../JS/usuarios.js"></script>
-        <script src="../JS/dasboard.js"></script>
-        <script src="../JS/sidebar.js"></script>
-        <script src="../JS/menuUsuario.js"></script>
+
+        <!-- JS del sistema -->
+        <script src="<%= context%>/JS/usuarios.js"></script>
+        <script src="<%= context%>/JS/sidebar.js"></script>
+        <script src="<%= context%>/JS/menuUsuario.js"></script>
+        <script src="<%= context%>/JS/dasboard.js"></script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+        <script src="${pageContext.request.contextPath}/js/datatable-init.js"></script>
+
     </body>
 </html>

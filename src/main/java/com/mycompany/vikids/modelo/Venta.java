@@ -11,27 +11,29 @@ public class Venta {
     private int id;
     private LocalDateTime fecha;
     private int idCliente;
-    private int idUsuarioAdmin;
+    private int idAdmin;
     private double total;
     private double descuento;
+    private String tipoComprobante;
+    private String numeroComprobante;
     private double igv;
     private String tipoPago;
     private String estado;
 
-    public Venta() {
-    }
-
-    public Venta(int id, LocalDateTime fecha, int idCliente, int idUsuarioAdmin, double total, double descuento, double igv, String tipoPago, String estado) {
+    public Venta(int id, LocalDateTime fecha, int idCliente, int idAdmin, double total, double descuento, String tipoComprobante, String numeroComprobante, double igv, String tipoPago, String estado) {
         this.id = id;
         this.fecha = fecha;
         this.idCliente = idCliente;
-        this.idUsuarioAdmin = idUsuarioAdmin;
+        this.idAdmin = idAdmin;
         this.total = total;
         this.descuento = descuento;
+        this.tipoComprobante = tipoComprobante;
+        this.numeroComprobante = numeroComprobante;
         this.igv = igv;
         this.tipoPago = tipoPago;
         this.estado = estado;
     }
+
 
     public int getId() {
         return id;
@@ -57,12 +59,12 @@ public class Venta {
         this.idCliente = idCliente;
     }
 
-    public int getIdUsuarioAdmin() {
-        return idUsuarioAdmin;
+    public int getIdAdmin() {
+        return idAdmin;
     }
 
-    public void setIdUsuarioAdmin(int idUsuarioAdmin) {
-        this.idUsuarioAdmin = idUsuarioAdmin;
+    public void setIdAdmin(int idUsuarioAdmin) {
+        this.idAdmin = idUsuarioAdmin;
     }
 
     public double getTotal() {
@@ -103,6 +105,22 @@ public class Venta {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public String getTipoComprobante() {
+        return tipoComprobante;
+    }
+
+    public void setTipoComprobante(String tipoComprobante) {
+        this.tipoComprobante = tipoComprobante;
+    }
+
+    public String getNumeroComprobante() {
+        return numeroComprobante;
+    }
+
+    public void setNumeroComprobante(String numeroComprobante) {
+        this.numeroComprobante = numeroComprobante;
     }
     
     
