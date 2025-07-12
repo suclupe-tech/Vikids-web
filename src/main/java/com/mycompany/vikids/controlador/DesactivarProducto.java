@@ -25,7 +25,7 @@ public class DesactivarProducto extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String codigo = request.getParameter("codigo");
-        ProductoDAOImpl dao = new ProductoDAOImpl(conexionSQL.conectar());
+        ProductoDAOImpl dao = new ProductoDAOImpl();
 
         if (dao.desactivar(codigo)) {
             response.sendRedirect("listarProductos.jsp?mensaje=desactivado");

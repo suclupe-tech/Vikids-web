@@ -28,7 +28,7 @@ public class ReactivarProducto extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String codigo = request.getParameter("codigo");
-        ProductoDAOImpl dao = new ProductoDAOImpl(conexionSQL.conectar());
+        ProductoDAOImpl dao = new ProductoDAOImpl();
 
         if (dao.reactivar(codigo)) {
             response.sendRedirect("productosInactivos.jsp?reactivado=1");

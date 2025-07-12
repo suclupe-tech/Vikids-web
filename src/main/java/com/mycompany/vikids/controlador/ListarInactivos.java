@@ -28,7 +28,7 @@ public class ListarInactivos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ProductoDAO dao = new ProductoDAOImpl(conexionSQL.conectar());
+        ProductoDAO dao = new ProductoDAOImpl();
 
         List<Producto> lista = dao.listarInactivos(); // tu método en DAO
 

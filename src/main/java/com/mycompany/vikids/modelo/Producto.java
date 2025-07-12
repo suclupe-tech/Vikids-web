@@ -4,13 +4,7 @@
  */
 package com.mycompany.vikids.modelo;
 
-import java.io.InputStream;
-import javax.print.DocFlavor;
-
-/**
- *
- * @author USER
- */
+ 
 public class Producto {
 
     private int id;
@@ -23,12 +17,13 @@ public class Producto {
     private String marca;
     private String unidad;
     private String imagen;
+    private int publicado;
     private boolean activo;
 
     public Producto() {
     }
 
-    public Producto(int id, String codigo, String nombre, String descripcion, int stock, double precio, String categoria, String marca, String unidad, String imagen, boolean activo) {
+    public Producto(int id, String codigo, String nombre, String descripcion, int stock, double precio, String categoria, String marca, String unidad, String imagen, int publicado, boolean activo) {
         this.id = id;
         this.codigo = codigo;
         this.nombre = nombre;
@@ -39,8 +34,11 @@ public class Producto {
         this.marca = marca;
         this.unidad = unidad;
         this.imagen = imagen;
+        this.publicado = publicado;
         this.activo = activo;
     }
+
+    
 
     public int getId() {
         return id;
@@ -122,6 +120,14 @@ public class Producto {
         this.imagen = imagen;
     }
 
+    public int getPublicado() {
+        return publicado;
+    }
+
+    public void setPublicado(int publicado) {
+        this.publicado = publicado;
+    }
+    
     public boolean getActivo() {
         return activo;
     }

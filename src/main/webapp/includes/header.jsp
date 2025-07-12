@@ -9,28 +9,29 @@
 
         <!-- Logo -->
         <a href="#" class="flex items-center space-x-3">
-            <img src="../imagen/logo vk png.png" alt="Logo" class="w-20">
+            <img src="<%= request.getContextPath() %>/imagen/logo vk png.png" alt="Logo" class="w-20">
+
                 <span class="font-bold text-xl">Vikids</span>
         </a>
 
         <!-- link menu -->
         <div class="hidden md:flex items-center space-x-3 px-10">
-            <a href="index.jsp" class="hover:text-pink-600">Inicio</a>
+            <a href="vistaUsuario/index.jsp" class="hover:text-pink-600">Inicio</a>
 
             <!-- Catálogo desplegable -->
             <div class="relative group inline-block">
                 <button class="cursor-pointer text-gray-700 hover:text-pink-600">Catálogo</button>
 
                 <ul class="absolute left-0 mt-2 w-40 bg-white border border-gray-300 rounded-md shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-opacity duration-200 z-50">
-                    <li><a href="catalogoPantalon.jsp" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">Pantalón</a></li>
-                    <li><a href="#" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">Polos</a></li>
+                    <li><a href="<%= request.getContextPath() %>/MostrarCatalogo?categoria=pantalones" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">Pantalón</a></li>
+                    <li><a href="<%= request.getContextPath() %>/MostrarCatalogo?categoria=polos" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">Polos</a></li>
                     <li><a href="#" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">Blusas</a></li>
                     <li><a href="#" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">MiniFaldas</a></li>
                     <li><a href="#" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">MiniShort</a></li>
                     <li><a href="#" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">Casacas</a></li>
                 </ul>
             </div>
-            <a href="contacto.jsp" class="hover:text-pink-600">Contacto</a>
+            <a href="#" class="hover:text-pink-600">Contacto</a>
         </div>
 
         <!-- Botón hamburguesa -->
@@ -88,8 +89,8 @@
             <button class="cursor-pointer text-gray-700 hover:text-pink-600">Catálogo</button>
 
             <ul class="absolute left-0 mt-2 w-40 bg-white border border-gray-300 rounded-md shadow-lg opacity-0 invisible group-hover:visible group-hover:opacity-100 transition-opacity duration-200 z-50">
-                <li><a href="catalogoPantalon.jsp" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">Pantalón</a></li>
-                <li><a href="#" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">Polos</a></li>
+                <li><a href="<%= request.getContextPath() %>/MostrarCatalogo?categoria=pantalones" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">Pantalón</a></li>
+                <li><a href="<%= request.getContextPath() %>/MostrarCatalogo?categoria=polos" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">Polos</a></li>
                 <li><a href="#" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">Blusas</a></li>
                 <li><a href="#" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">MiniFaldas</a></li>
                 <li><a href="#" class="block px-4 py-2 text-gray-600 hover:bg-pink-100">MiniShort</a></li>

@@ -4,12 +4,10 @@
     Author     : USER
 --%>
 
-<%@page import="com.mycompany.vikids.dao.impl.ProductoDAOImpl"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@page import="com.mycompany.vikids.dao.impl.ProductoDAOImpl" %>
 <%@page import="com.mycompany.vikids.modelo.Producto" %>
-<%@page import="com.mycompany.vikids.util.conexionSQL" %>
 <%@page import="java.util.List" %>
 
 <%HttpSession sesion = request.getSession(false);
@@ -21,9 +19,11 @@
 %>
 
 <%
-    ProductoDAOImpl dao = new ProductoDAOImpl(conexionSQL.conectar());
+    ProductoDAOImpl dao = new ProductoDAOImpl();
     List<Producto> lista = dao.listarTodos();
 %>
+
+
 
 <html>
     <head>
@@ -43,6 +43,26 @@
         <div id="mainContent" class="max-w-7xl mx-auto bg-white p-6 rounded-xl shadow-lg ml-64 mt-20 p-6">
             <h5 class="text-2xl font-semibold mb-4">Lista de Productos</h5>
             <h3 class="text-xl font-semibold mb-2">Bienvenido, <%= usuario%> 👋</h3>
+
+            <%
+                String publicado = request.getParameter("publicado");
+                if ("ok".equals(publicado)) {
+            %>
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                ✅ Producto publicado exitosamente.
+            </div>
+            <%
+            } else if ("error".equals(publicado)) {
+            %>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                ❌ Hubo un error al publicar el producto.
+            </div>
+            <%
+                }
+            %>
+
+        
+
 
             <!-- Barra de herramientas -->
             <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
@@ -76,6 +96,7 @@
                             <th class="px-4 py-3">Marca</th>
                             <th class="px-4 py-3">Unidad</th>
                             <th class="px-4 py-3">Imagen</th>
+                            <th class="px-4 py-3">Publicar</th>
                             <th class="px-4 py-3">Acción</th>
                         </tr>
                     </thead>
@@ -94,6 +115,19 @@
                             <td class="px-4 py-3">
                                 <img src="../imagen/<%=p.getImagen()%>" class="w-10 h-10 object-contain mx-auto rounded shadow" alt="Imagen del producto"/>
                             </td>
+                            <td class="px-4 py-3 text-center">
+                                <% if (p.getPublicado() == 0) {%>
+                                <form action="<%= request.getContextPath()%>/PublicarProducto" method="post">
+                                    <input type="hidden" name="idProducto" value="<%= p.getId()%>">
+                                    <button type="submit" class="bg-yellow-400 text-black px-3 py-1 rounded-full hover:bg-yellow-500 font-medium">
+                                        Publicar
+                                    </button>
+                                </form>
+                                <% } else { %>
+                                <span class="bg-green-500 text-white px-3 py-1 rounded-full font-medium">Publicado ✅</span>
+                                <% }%>
+                            </td>
+
                             <td class="px-4 py-3">
                                 <div class="flex justify-center gap-2">
                                     <a href="verProducto.jsp?id=1" class="text-lg hover:text-blue-600"><i class="bi bi-eye mr-2"></i>️</a>

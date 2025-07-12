@@ -95,7 +95,7 @@ public class RegistrarProducto extends HttpServlet {
                 throw new ServletException("No se pudo conectar a la base de datos");
             }
 
-            ProductoDAOImpl dao = new ProductoDAOImpl(conexionSQL.conectar());
+            ProductoDAOImpl dao = new ProductoDAOImpl();
             boolean exito = dao.insert(prod);
 
             if (exito) {

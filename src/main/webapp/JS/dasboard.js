@@ -129,7 +129,25 @@ document.querySelectorAll('[data-target]').forEach(link => {
         }
     });
 });
+// Oculta el mensaje después de 4 segundos
+document.addEventListener("DOMContentLoaded", function () {
+    const mensaje = document.querySelector(".bg-green-100, .bg-red-100"); // Detecta mensaje exitoso o de error
 
+    if (mensaje) {
+        setTimeout(() => {
+            mensaje.style.transition = "opacity 0.5s ease";
+            mensaje.style.opacity = "0";
+            setTimeout(() => {
+                mensaje.remove();
+
+                // Eliminar parámetro de la URL sin recargar
+                const url = new URL(window.location.href);
+                url.searchParams.delete("publicado");
+                window.history.replaceState({}, document.title, url.pathname);
+            }, 500);
+        }, 3000); // 3 segundos visibles antes de ocultar
+    }
+});
 
 
 

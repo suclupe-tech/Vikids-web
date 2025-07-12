@@ -27,7 +27,6 @@ public class GuardarVenta extends HttpServlet {
             throws ServletException, IOException {
 
         String tipoComprobante = request.getParameter("tipoComprobante");
-        String numeroComprobante = request.getParameter("numeroComprobante");
         String fecha = request.getParameter("fechaVenta");
         String tipoPago = request.getParameter("tipoPago");
         String descuentoStr = request.getParameter("descuento");
@@ -35,7 +34,6 @@ public class GuardarVenta extends HttpServlet {
         String igvStr = request.getParameter("igv");
         String totalStr = request.getParameter("total");
         String idClienteStr = request.getParameter("idCliente");
-        
 
         double descuento = (descuentoStr != null && !descuentoStr.isEmpty()) ? Double.parseDouble(descuentoStr) : 0;
         double subtotal = (subtotalStr != null && !subtotalStr.isEmpty()) ? Double.parseDouble(subtotalStr) : 0;
@@ -70,6 +68,9 @@ public class GuardarVenta extends HttpServlet {
         } catch (Exception e) {
             fechaVenta = LocalDateTime.now(); // respaldo por si falla
         }
+// Guardar en BD
+        VentaDAOImpl dao = new VentaDAOImpl(new com.mycompany.vikids.util.conexionSQL().getConnection());
+        String numeroComprobante = dao.generarNumeroComprobante(tipoComprobante);
 
         // Crear objeto Venta
         Venta venta = new Venta(0,
@@ -83,9 +84,6 @@ public class GuardarVenta extends HttpServlet {
                 igv,
                 tipoPago,
                 estado);
-
-        // Guardar en BD
-        VentaDAOImpl dao = new VentaDAOImpl(new com.mycompany.vikids.util.conexionSQL().getConnection());
 
         System.out.println("➡️ Preparando venta:");
         System.out.println("ID Cliente: " + idCliente);

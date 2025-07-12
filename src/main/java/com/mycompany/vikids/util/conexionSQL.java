@@ -51,7 +51,7 @@ public class conexionSQL {
         return conn;
     }
 
-    public Connection getConnection() {
+    public static Connection getConnection() {
         return conectar();
     }
 

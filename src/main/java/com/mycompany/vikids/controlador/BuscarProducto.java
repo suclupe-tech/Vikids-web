@@ -24,7 +24,7 @@ public class BuscarProducto extends HttpServlet {
 
         String codigo = request.getParameter("codigo");
 
-        ProductoDAOImpl dao = new ProductoDAOImpl(new conexionSQL().getConnection());
+        ProductoDAOImpl dao = new ProductoDAOImpl();
         
         if (codigo == null || codigo.trim().isEmpty()) {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

@@ -9,17 +9,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import com.mycompany.vikids.dao.ProductoDAO;
+import com.mycompany.vikids.util.conexionSQL;
 
 public class ProductoDAOImpl implements ProductoDAO {
 
     private Connection conn;
 
-    public ProductoDAOImpl(Connection conn) {
-        this.conn = conn;
-    }
-
     public ProductoDAOImpl() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.conn = conexionSQL.getConnection();
     }
 
     private boolean validarProducto(Producto p) {
@@ -246,5 +243,34 @@ public class ProductoDAOImpl implements ProductoDAO {
         producto.setActivo(rs.getBoolean("activo"));
         return producto;
     }
+
+    public boolean publicar(int idProducto) {
+    String sql = "UPDATE producto SET publicado = 1 WHERE id = ?";
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, idProducto);
+        int filas = ps.executeUpdate();
+        return filas > 0;
+    } catch (SQLException e) {
+        System.out.println("Error al publicar el producto: " + e.getMessage());
+        return false;
+    }
+}
+
+
+    public List<Producto> listarPublicadosPorCategoria(String categoria) {
+    List<Producto> lista = new ArrayList<>();
+    String sql = "SELECT * FROM producto WHERE activo = 1 AND publicado = 1 AND categoria = ?";
+    try (PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, categoria);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            lista.add(crearProductoDesdeRS(rs));
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return lista;
+}
+
 
 }
