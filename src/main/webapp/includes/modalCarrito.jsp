@@ -13,10 +13,8 @@
     <!-- Total -->
     <div class="p-4 border-t">
         <p class="font-semibold text-right">Total: <span id="cartTotal"></span></p>
-<<<<<<< Upstream, based on origin/master
-        <button class="mt-3 w-full bg-pink-500 text-white py-2 rounded hover:bg-pink-600">Procesar Pedido</button>
-=======
+
         <button onclick="enviarPedidoPorWhatsApp()" class="mt-3 w-full bg-pink-500 text-white py-2 rounded hover:bg-pink-600">Procesar Pedido</button>
->>>>>>> 5c196ef final
+
     </div>
 </div>
