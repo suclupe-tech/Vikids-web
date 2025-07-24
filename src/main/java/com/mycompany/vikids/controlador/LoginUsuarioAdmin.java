@@ -46,17 +46,24 @@ public class LoginUsuarioAdmin extends HttpServlet {
 
             //Verificar si ya tiene sesion activa
             if (LoginCache.sessionCache.getIfPresent(username) != null) {
-                response.sendRedirect("dashboard.jsp");
+
+                response.sendRedirect(request.getContextPath() + "/vistaAdmin/dashboard.jsp");
                 return;
             }
 
             //Verificar en la base de datos
             if (dao.autenticar(username, password)) {
                 HttpSession session = request.getSession();
-                session.setAttribute("usuario", username);
+                com.mycompany.vikids.modelo.UsuarioAdmin admin = dao.obtenerPorUsuario(username);
+                session.setAttribute("adminLogueado", admin);
+                session.setAttribute("idAdmin", admin.getId());
+
+
                 LoginCache.sessionCache.put(username, "activo");
                 LoginCache.loginAttempts.invalidate(username);
-                response.sendRedirect("dashboard.jsp");
+                response.sendRedirect(request.getContextPath() + "/vistaAdmin/dashboard.jsp");
+
+
             } else {
                 int nuevoIntento = intentos == null ? 1 : intentos + 1;
                 LoginCache.loginAttempts.put(username, nuevoIntento);

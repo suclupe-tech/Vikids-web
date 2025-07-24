@@ -56,7 +56,7 @@ public class UsuarioAdminDAOImpl implements UsuarioAdminDAO {
             System.out.println("⚠ El nombre de usuario ya está registrado.");
             return false;
         }
-        
+
         String sql = "INSERT INTO administrador (nombre, apellido, usuario, contraseña, telefono) VALUES (?, ?, ?, ?, ?)";
         try (Connection con = conn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, usuario.getNombre());
@@ -219,6 +219,37 @@ public class UsuarioAdminDAOImpl implements UsuarioAdminDAO {
         u.setTelefono(rs.getString("telefono"));
 
         return u;
+    }
+
+    @Override
+    public UsuarioAdmin obtenerPorUsuario(String username) {
+        UsuarioAdmin admin = null;
+        String sql = "SELECT * FROM administrador WHERE usuario = ?";
+
+        try (Connection con = conn.getConnection(); PreparedStatement ps = con.prepareStatement(sql)) {
+            System.out.println("🔍 Ejecutando consulta para: " + username);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                admin = new UsuarioAdmin();
+                admin.setId(rs.getInt("id"));
+                admin.setNombre(rs.getString("nombre"));
+                admin.setApellido(rs.getString("apellido"));
+                admin.setUsuario(rs.getString("usuario"));
+                admin.setTelefono(rs.getString("telefono"));
+                System.out.println("✅ UsuarioAdmin encontrado: " + admin.getNombre());
+            } else {
+                System.out.println("⚠️ No se encontró al usuario: " + username);
+            }
+
+        } catch (Exception e) {
+            System.out.println("❌ Error al obtener el administrador por usuario: " + username);
+            e.printStackTrace();
+        }
+
+        return admin;
+
     }
 
 }

@@ -23,24 +23,23 @@ public class LogoutServlet extends HttpServlet {
 
         HttpSession sesion = request.getSession(false);
         if (sesion != null) {
-            Object usuarioObj = sesion.getAttribute("usuario");
-            if (usuarioObj != null) {
-                String usuario = usuarioObj.toString();
+
+            Object usuarioObj = sesion.getAttribute("adminLogueado");
+
+            if (usuarioObj instanceof com.mycompany.vikids.modelo.UsuarioAdmin) {
+                com.mycompany.vikids.modelo.UsuarioAdmin admin = (com.mycompany.vikids.modelo.UsuarioAdmin) usuarioObj;
+                String usuario = admin.getUsuario();
                 if (LoginCache.sessionCache != null) {
                     LoginCache.sessionCache.invalidate(usuario);
+                    System.out.println("✅ Sesión de " + usuario + " invalidada del cache.");
                 }
             }
+
             sesion.invalidate();
+            System.out.println("🧼 Sesión cerrada completamente.");
         }
+
         response.sendRedirect(request.getContextPath() + "/vistaAdmin/admin.jsp?logout=1");
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
 }

@@ -4,6 +4,7 @@
     Author     : USER
 --%>
 
+<<<<<<< Upstream, based on origin/master
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@page import="com.mycompany.vikids.dao.impl.ProductoDAOImpl" %>
@@ -62,6 +63,69 @@
             %>
 
         
+=======
+<%@page import="com.mycompany.vikids.modelo.UsuarioAdmin"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%@page import="com.mycompany.vikids.dao.impl.ProductoDAOImpl" %>
+<%@page import="com.mycompany.vikids.modelo.Producto" %>
+<%@page import="java.util.List" %>
+
+<%
+    HttpSession sesion = request.getSession(false);
+    UsuarioAdmin admin = (sesion != null) ? (UsuarioAdmin) sesion.getAttribute("adminLogueado") : null;
+    if (admin == null) {
+        response.sendRedirect("admin.jsp");
+        return;
+    }
+    String usuario = admin.getUsuario(); // Ya puedes usarlo si lo necesitas
+%>
+
+<%
+    ProductoDAOImpl dao = new ProductoDAOImpl();
+    List<Producto> lista = dao.listarTodos();
+%>
+
+
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Administrador</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+
+    </head>
+    <body>
+
+        <%@include file="../includes/adminPrincipal.jsp" %>
+        <!-- Contenido principal -->
+        <div id="mainContent" class="max-w-7xl mx-auto bg-white p-6 rounded-xl shadow-lg transition-all ml-64 mt-20 p-6">
+            <h5 class="text-2xl font-semibold mb-4">Lista de Productos</h5>
+            <h3 class="text-xl font-semibold mb-2">Bienvenido, <%= usuario%> 👋</h3>
+
+            <%
+                String publicado = request.getParameter("publicado");
+                if ("ok".equals(publicado)) {
+            %>
+            <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
+                ✅ Producto publicado exitosamente.
+            </div>
+            <%
+            } else if ("error".equals(publicado)) {
+            %>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                ❌ Hubo un error al publicar el producto.
+            </div>
+            <%
+                }
+            %>
+
+
+>>>>>>> 5c196ef final
 
 
             <!-- Barra de herramientas -->

@@ -1,3 +1,4 @@
+
 package com.mycompany.sistemavikids.resources;
 
 import javax.ws.rs.GET;
@@ -18,3 +19,4 @@ public class JakartaEE8Resource {
                 .build();
     }
 }
+

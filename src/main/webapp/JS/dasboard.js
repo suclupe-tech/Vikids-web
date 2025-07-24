@@ -147,7 +147,11 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 500);
         }, 3000); // 3 segundos visibles antes de ocultar
     }
+<<<<<<< Upstream, based on origin/master
 });
 
 
 
+=======
+});
+>>>>>>> 5c196ef final

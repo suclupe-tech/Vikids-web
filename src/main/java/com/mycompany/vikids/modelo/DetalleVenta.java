@@ -13,6 +13,10 @@ public class DetalleVenta {
     private double precioUnitario;
     private double subtotal;
 
+    public DetalleVenta() {
+    }
+
+
     public DetalleVenta(int id, int idVenta, int idProducto, String nombreProducto, int cantidad, double precioUnitario, double subtotal) {
         this.id = id;
         this.idVenta = idVenta;

@@ -81,7 +81,19 @@ public class VentaDAOImpl implements VentaDAO {
     @Override
     public boolean guardarVentaConDetalle(Venta venta, List<DetalleVenta> detalles) {
 
+        System.out.println("📥 RECIBIDO en guardarVentaConDetalle(): idAdmin = " + venta.getIdAdmin());
+
+        System.out.println("🧾 Validando venta:");
+        System.out.println("   idCliente = " + venta.getIdCliente());
+        System.out.println("   idAdmin = " + venta.getIdAdmin());
+        System.out.println("   total = " + venta.getTotal());
+        System.out.println("   tipoComprobante = " + venta.getTipoComprobante());
+        System.out.println("   numeroComprobante = " + venta.getNumeroComprobante());
+        System.out.println("   detalles.size = " + detalles.size());
+
         if (!validarVenta(venta, detalles)) {
+            System.out.println("📌 Entrando a validarVenta");
+
             System.out.println("❌ Venta inválida. Revisa los datos recibidos.");
             return false;
         }
@@ -96,6 +108,8 @@ public class VentaDAOImpl implements VentaDAO {
         String sqlDetalle = "INSERT INTO detalle_venta (id_venta, id_producto, nombre_producto, cantidad, precio_unitario, subtotal) VALUES (?, ?, ?, ?, ?, ?)";
 
         try {
+            System.out.println("🔌 Conexión activa: " + (conn != null && !conn.isClosed()));
+
             conn.setAutoCommit(false); // Iniciar transacción
 
             // Insertar venta
@@ -146,14 +160,23 @@ public class VentaDAOImpl implements VentaDAO {
             return true;
 
         } catch (Exception e) {
+            System.out.println("❌ EXCEPCIÓN durante la inserción de venta:");
+            e.printStackTrace(); // Mostrará el error exacto
+
             try {
-                conn.rollback();
-            } catch (Exception ex) {
-                ex.printStackTrace();
+                if (conn != null) {
+                    conn.rollback();
+                    System.out.println("🔄 Rollback ejecutado.");
+                }
+            } catch (Exception rollbackEx) {
+                System.out.println("❌ Error durante rollback:");
+                rollbackEx.printStackTrace();
             }
-            e.printStackTrace();
+
             return false;
         }
+
+
     }
 
     @Override

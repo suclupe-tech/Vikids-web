@@ -4,6 +4,10 @@
     Author     : USER
 --%>
 
+<<<<<<< Upstream, based on origin/master
+=======
+
+>>>>>>> 5c196ef final
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

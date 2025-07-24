@@ -20,12 +20,17 @@ public class Venta {
     private String tipoPago;
     private String estado;
 
+    public Venta() {
+    }
+    
+   
     public Venta(int id, LocalDateTime fecha, int idCliente, int idAdmin, double total, double descuento, String tipoComprobante, String numeroComprobante, double igv, String tipoPago, String estado) {
         this.id = id;
         this.fecha = fecha;
         this.idCliente = idCliente;
         this.idAdmin = idAdmin;
         this.total = total;
+       
         this.descuento = descuento;
         this.tipoComprobante = tipoComprobante;
         this.numeroComprobante = numeroComprobante;
